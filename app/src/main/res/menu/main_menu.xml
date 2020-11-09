@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/main_menu_item_gallery"
+        android:checked="true"
         android:enabled="true"
         android:icon="@drawable/ic_add_from_gallery"
-        android:title="Gallery"
-        android:checked="true"/>
-        <item
-        android:id="@+id/page_2"
+        android:title="Gallery" />
+    <item
+        android:id="@+id/main_menu_item_favorites"
+        android:checked="false"
         android:enabled="true"
         android:icon="@drawable/ic_favorites"
         android:title="Favourites"
-        android:checked="false"
 
         />
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/main_menu_item_help"
+        android:checked="false"
         android:enabled="true"
         android:icon="@drawable/ic_help"
-        android:title="Help"
-        android:checked="false"
-        />
+        android:title="Help" />
 </menu>

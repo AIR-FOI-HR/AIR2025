@@ -8,23 +8,32 @@
 
 
     <TextView
+        android:id="@+id/activity_main_txt_tap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/activit_ymain_btn_take_photo"
+        android:layout_above="@+id/activity_main_imgbtn_take_photo"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="25dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Tap to find !"
-        android:textColor="#95FFFFFF"
+        android:text="@string/tap_find"
+        android:textColor="@color/colorOpacityWhite"
         android:textSize="25sp"
         android:textStyle="bold" />
 
+    <RelativeLayout
+        android:id="@+id/activity_main_rellay_pulse"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_pulse" />
+
     <ImageButton
-        android:id="@+id/activit_ymain_btn_take_photo"
+        android:id="@+id/activity_main_imgbtn_take_photo"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/circular_button"
+        android:contentDescription="@string/wienerberger_logo"
         android:src="@drawable/logo" />
 
 
@@ -33,10 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#F9C8A7"
-        app:itemIconTint="@color/wienerberger"
+        android:background="@color/colorOpacityWhite"
+        app:itemIconTint="@color/colorWienerberger"
         app:itemRippleColor="#F37B2C"
-        app:itemTextColor="@color/wienerberger"
-        app:menu="@menu/main_menu"/>
+        app:itemTextColor="@color/colorWienerberger"
+        app:menu="@menu/main_menu" />
 
 </RelativeLayout>
