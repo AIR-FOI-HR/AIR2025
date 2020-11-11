@@ -13,4 +13,5 @@
     <color name="colorOpacityWhite">#F9C8A7</color>
     <color name="colorRippleEffect">#E6B08C</color>
     <color name="colorPulse">#90F9C8A7</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>
