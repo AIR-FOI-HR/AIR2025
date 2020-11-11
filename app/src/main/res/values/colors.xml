@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--Our colors -->
+    <color name="colorWienerberger">#B30000</color>
+    <color name="colorOpacityWhite">#F9C8A7</color>
+    <color name="colorRippleEffect">#E6B08C</color>
+    <color name="colorPulse">#90F9C8A7</color>
 </resources>
