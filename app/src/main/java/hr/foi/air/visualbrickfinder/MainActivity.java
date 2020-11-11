@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -97,8 +98,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
-                btnTakePhoto.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                //btnTakePhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 startActivityForResult(intent, 100);
+
 
             }
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        animation.setFillAfter(true);
         btnTakePhoto.startAnimation(animation);
     }
 
@@ -114,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_shrink_anim);
+            animation.setFillAfter(true);
+            btnTakePhoto.startAnimation(animation);
             btnTakePhoto.setImageResource(R.drawable.logo);
         }
     }
