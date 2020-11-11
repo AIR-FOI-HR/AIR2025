@@ -75,17 +75,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setCameraAnimation();
-                Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
-                startActivityForResult(intent, 100);
-
             }
         });
     }
 
+    /**
+     * Synchronizes animation with the speed of opening up camera
+     */
+
     private void setCameraAnimation() {
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_grow_anim);
         btnTakePhoto.setImageResource(R.color.colorTransparent);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
+                startActivityForResult(intent, 100);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         btnTakePhoto.startAnimation(animation);
     }
 
