@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setButtonAnimation();
+        setButtonAnimation(true);
         requestCameraPermission();
     }
 
@@ -56,9 +56,16 @@ public class MainActivity extends AppCompatActivity {
      * @ Alen Sanković
      * Sets pulsing animation on main button
      */
-    private void setButtonAnimation() {
-        Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_glow_anim);
-        pulse.startAnimation(animation);
+    private void setButtonAnimation(boolean startAnime) {
+        if (startAnime) {
+            Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_glow_anim);
+            pulse.setVisibility(View.VISIBLE);
+            pulse.startAnimation(animation);
+
+        } else {
+            pulse.setVisibility(View.GONE);
+            pulse.clearAnimation();
+        }
     }
 
     /**
@@ -92,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                //početak animacije
+                setButtonAnimation(false);
             }
 
             @Override
@@ -114,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100) {
+            setButtonAnimation(true);
             Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_shrink_anim);
             animation.setFillAfter(true);
             btnTakePhoto.startAnimation(animation);

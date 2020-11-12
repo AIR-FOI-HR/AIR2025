@@ -1,25 +1,31 @@
 
-y
-java:S1128"^Remove this unused import 'com.google.android.material.bottomnavigation.BottomNavigationView'.(ºØÇÿÿÿÿÿ
-Y
-java:S1128"CRemove this unused import 'android.animation.PropertyValuesHolder'.(° Üâ
-P
-java:S1128"3Remove this unused import 'android.view.ViewGroup'.(‹îá8ú½¤ÎÛ.
-U
-java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8Ÿ»ÓÁÛ.
-Z
-java:S1128"8Remove this unused import 'android.widget.LinearLayout'.(çîšçúÿÿÿÿ8ØáĞÂÛ.
-L
-java:S1128"/Remove this unused import 'android.os.Handler'.(ûÛ’¡8ºˆÅÑÛ.
-O
-java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ
-R
-java:S1128"7Remove this unused import 'android.widget.FrameLayout'.(ºÍ‹Ùúÿÿÿÿ
+V
+java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ8¬Ï³æÛ.
 f
 java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8ˆÂÁÛ.
-^
-java:S1128"<Remove this unused import 'android.animation.ValueAnimator'.(©…²øÿÿÿÿ8ÏéµÃÛ.
-d
-java:S1128"BRemove this unused import 'android.view.animation.AlphaAnimation'.(Àï¾ıüÿÿÿÿ8İŠ„ÁÛ.
+L
+java:S1128"/Remove this unused import 'android.os.Handler'.(ûÛ’¡8ºˆÅÑÛ.
+Z
+java:S1128"8Remove this unused import 'android.widget.LinearLayout'.(çîšçúÿÿÿÿ8¬Ï³æÛ.
+Y
+java:S1128"7Remove this unused import 'android.widget.FrameLayout'.(ºÍ‹Ùúÿÿÿÿ8¬Ï³æÛ.
 P
 java:S1128".Remove this unused import 'android.view.View'.(Ø½­äşÿÿÿÿ8ñÜûÑÛ.
+g
+java:S1128"ERemove this unused import 'androidx.appcompat.app.AppCompatDelegate'.(Úïà±ıÿÿÿÿ8âÂÂæÛ.
+S
+java:S18740"7Remove this use of "FLAG_FULLSCREEN"; it is deprecated.(±ùËD8Úæ³æÛ.
+U
+java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8Ÿ»ÓÁÛ.
+Y
+java:S1128"CRemove this unused import 'android.animation.PropertyValuesHolder'.(° Üâ
+€
+java:S1128!"^Remove this unused import 'com.google.android.material.bottomnavigation.BottomNavigationView'.(ºØÇÿÿÿÿÿ8¬Ï³æÛ.
+d
+java:S1128"BRemove this unused import 'android.view.animation.AlphaAnimation'.(Àï¾ıüÿÿÿÿ8¬Ï³æÛ.
+^
+java:S1128"<Remove this unused import 'android.animation.ValueAnimator'.(©…²øÿÿÿÿ8ÏéµÃÛ.
+S
+java:S18740"7Remove this use of "FLAG_FULLSCREEN"; it is deprecated.(±ùËD8Úæ³æÛ.
+P
+java:S1128"3Remove this unused import 'android.view.ViewGroup'.(‹îá8ú½¤ÎÛ.
