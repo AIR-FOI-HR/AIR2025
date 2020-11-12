@@ -2,35 +2,23 @@ package hr.foi.air.visualbrickfinder;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 
 import android.Manifest;
-import android.animation.PropertyValuesHolder;
-import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout pulse;
     @BindView(R.id.activity_main_imgbtn_take_photo)
     ImageButton btnTakePhoto;
+    @BindView(R.id.activity_main_txt_tap)
+    TextView txtTap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private void setButtonAnimation(boolean startAnime) {
         if (startAnime) {
             Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_glow_anim);
+            txtTap.setVisibility(View.VISIBLE);
             pulse.setVisibility(View.VISIBLE);
             pulse.startAnimation(animation);
-
         } else {
+            txtTap.setVisibility(View.GONE);
             pulse.setVisibility(View.GONE);
             pulse.clearAnimation();
         }
