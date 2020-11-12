@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_imgbtn_take_photo)
     ImageButton btnTakePhoto;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         requestCameraPermission();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
+
     /**
      * @ Alen Sanković
      * Sets pulsing animation on main button
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_glow_anim);
         pulse.startAnimation(animation);
     }
+
     /**
      * Matej Stojanović
      * Requests camera permission
@@ -120,4 +122,6 @@ public class MainActivity extends AppCompatActivity {
             btnTakePhoto.setImageResource(R.drawable.logo);
         }
     }
+
+
 }

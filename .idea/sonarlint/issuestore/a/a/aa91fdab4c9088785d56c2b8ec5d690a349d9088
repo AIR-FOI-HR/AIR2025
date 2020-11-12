@@ -1,27 +1,23 @@
 
-£
-java:S1186i"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(úƒÚÓûÿÿÿÿ8ŸÎŒÂÛ.
-^
-java:S1128"<Remove this unused import 'android.animation.ValueAnimator'.(©…²øÿÿÿÿ8ÏéµÃÛ.
-Y
-java:S1128
-"CRemove this unused import 'android.animation.PropertyValuesHolder'.(° Üâ
-X	java:S125d"<This block of commented-out lines of code should be removed.(ŒÏŸ8±ƒæÂÛ.
-Z
-java:S1128"8Remove this unused import 'android.widget.LinearLayout'.(çîšçúÿÿÿÿ8ØáĞÂÛ.
+f
+java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8ˆÂÁÛ.
+d
+java:S1128"BRemove this unused import 'android.view.animation.AlphaAnimation'.(Àï¾ıüÿÿÿÿ8İŠ„ÁÛ.
 J
 java:S1604M"(Make this anonymous inner class a lambda(äûÕûÿÿÿÿ8ãµ§¿Û.
+Y
+java:S1128"CRemove this unused import 'android.animation.PropertyValuesHolder'.(° Üâ
+Z
+java:S1128"8Remove this unused import 'android.widget.LinearLayout'.(çîšçúÿÿÿÿ8ØáĞÂÛ.
 y
-java:S1128"^Remove this unused import 'com.google.android.material.bottomnavigation.BottomNavigationView'.(ºØÇÿÿÿÿÿ
-f
-java:S1128"DRemove this unused import 'android.graphics.drawable.ColorDrawable'.(ÖŸÂ«øÿÿÿÿ8ˆÂÁÛ.
-O
-java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ
-
-java:S1186^"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ğ«Ôƒ8ŸÎŒÂÛ.
-U
-java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8Ÿ»ÓÁÛ.
+java:S1128"^Remove this unused import 'com.google.android.material.bottomnavigation.BottomNavigationView'.(ºØÇÿÿÿÿÿ
 R
-java:S1128"7Remove this unused import 'android.widget.FrameLayout'.(ºÍ‹Ùúÿÿÿÿ
-d
-java:S1128"BRemove this unused import 'android.view.animation.AlphaAnimation'.(Àï¾ıüÿÿÿÿ8İŠ„ÁÛ.
+java:S1128"7Remove this unused import 'android.widget.FrameLayout'.(ºÍ‹Ùúÿÿÿÿ
+P
+java:S1128"3Remove this unused import 'android.view.ViewGroup'.(‹îá8ú½¤ÎÛ.
+O
+java:S1128"4Remove this unused import 'android.widget.TextView'.(„Ë‚ˆÿÿÿÿÿ
+^
+java:S1128"<Remove this unused import 'android.animation.ValueAnimator'.(©…²øÿÿÿÿ8ÏéµÃÛ.
+U
+java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8Ÿ»ÓÁÛ.
