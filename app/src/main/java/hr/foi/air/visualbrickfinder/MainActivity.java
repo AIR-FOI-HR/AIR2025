@@ -76,12 +76,7 @@ public class MainActivity extends AppCompatActivity {
          * Matej Stojanović
          * Enables camera usage
          */
-        btnTakePhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setCameraAnimation();
-            }
-        });
+        btnTakePhoto.setOnClickListener(v -> setCameraAnimation());
     }
 
     /**
