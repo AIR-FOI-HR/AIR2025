@@ -2,4 +2,5 @@
     <string name="app_name">VisualBrickFinder</string>
     <string name="tap_find">Tap to find !</string>
     <string name="wienerberger_logo">Wienerberger logo</string>
+    <string name="visual_brick_finder">Visual Brick Finder</string>
 </resources>
