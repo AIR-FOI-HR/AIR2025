@@ -46,11 +46,8 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setButtonAnimation();
         requestCameraPermission();
-        AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
-
-
     /**
      * @ Alen Sanković
      * Sets pulsing animation on main button
@@ -59,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         Animation animation = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btn_glow_anim);
         pulse.startAnimation(animation);
     }
-
     /**
      * Matej Stojanović
      * Requests camera permission
@@ -96,17 +92,18 @@ public class MainActivity extends AppCompatActivity {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+                //početak animacije
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
                 Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
-                //btnTakePhoto.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 startActivityForResult(intent, 100);
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
+                //
             }
         });
         animation.setFillAfter(true);
