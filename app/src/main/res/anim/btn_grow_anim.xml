@@ -3,15 +3,15 @@
 
     <translate
         android:fromXDelta="1"
-        android:toXDelta="-100%"
+        android:toXDelta="-90%"
         android:duration="1000"
         />
 
     <scale
         android:fromXScale="1"
-        android:toXScale="150%p"
+        android:toXScale="120%p"
         android:fromYScale="1"
-        android:toYScale="280%p"
+        android:toYScale="210%p"
         android:duration="500"
         android:pivotX="-100%"
         android:pivotY="50%"
