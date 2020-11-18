@@ -48,7 +48,7 @@ public class HomepageFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_homepage, container, false);
         ButterKnife.bind(this,v);
         setButtonAnimation(true);
-        requestCameraPermission();
+        requestCameraAndStoragePermission();
         return  v;
     }
 
@@ -74,15 +74,21 @@ public class HomepageFragment extends Fragment {
      * @Matej Stojanović
      * Requests camera permission
      */
-    private void requestCameraPermission() {
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+    private void requestCameraAndStoragePermission() {
+        String permissions[] = {
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        };
+
+        if (ContextCompat.checkSelfPermission(getActivity(), permissions[0]) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getActivity(), permissions[1]) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getActivity(), permissions[0]) != PackageManager.PERMISSION_GRANTED)
+        {
             ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{
-                            Manifest.permission.CAMERA
-                    },
-                    100);
+                    permissions, 101);
         }
+
 
         /**
          * @Matej Stojanović
