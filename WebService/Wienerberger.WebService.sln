@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.API", "1.API", "{AD19D9EA-B6BF-4323-9F09-DD6D1DEB9FC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.API", "Wienerberger.WebService\Wienerberger.WebService.API\Wienerberger.WebService.API.csproj", "{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.API.Common", "Wienerberger.WebService\Wienerberger.WebService.API.Common\Wienerberger.WebService.API.Common.csproj", "{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.API.DataContracts", "Wienerberger.WebService\Wienerberger.WebService.API.DataContracts\Wienerberger.WebService.API.DataContracts.csproj", "{2496F140-57A6-49AF-8AF0-3F386166FCC8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00.Tests", "00.Tests", "{CCA331EC-1F1E-44F5-A421-8335F7A1997F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.API.Tests.Controllers", "Wienerberger.WebService\Wienerberger.WebService.API.Tests.Controllers\Wienerberger.WebService.API.Tests.Controllers.csproj", "{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Common", "01.Common", "{6AE2A46D-71BD-420B-B6A5-E45E55F9BA0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.IoC.Configuration", "Wienerberger.WebService\Wienerberger.WebService.IoC.Configuration\Wienerberger.WebService.IoC.Configuration.csproj", "{CCBD130E-D339-4AB7-A1BA-B20A9217969F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.Tools", "Wienerberger.WebService\Wienerberger.WebService.Tools\Wienerberger.WebService.Tools.csproj", "{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Services", "2.Services", "{11160818-720A-4533-98FD-1F8027D3F6C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wienerberger.WebService.Services", "Wienerberger.WebService\Wienerberger.WebService.Services\Wienerberger.WebService.Services.csproj", "{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2496F140-57A6-49AF-8AF0-3F386166FCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2496F140-57A6-49AF-8AF0-3F386166FCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2496F140-57A6-49AF-8AF0-3F386166FCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2496F140-57A6-49AF-8AF0-3F386166FCC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCBD130E-D339-4AB7-A1BA-B20A9217969F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCBD130E-D339-4AB7-A1BA-B20A9217969F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCBD130E-D339-4AB7-A1BA-B20A9217969F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCBD130E-D339-4AB7-A1BA-B20A9217969F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0B95AD17-6BF9-4E0A-9D1D-E8BBC5E47D31} = {AD19D9EA-B6BF-4323-9F09-DD6D1DEB9FC8}
+		{0F3D77A6-AC6D-4E0D-8EEA-A8F605CF633F} = {AD19D9EA-B6BF-4323-9F09-DD6D1DEB9FC8}
+		{2496F140-57A6-49AF-8AF0-3F386166FCC8} = {AD19D9EA-B6BF-4323-9F09-DD6D1DEB9FC8}
+		{73B3D2D4-4026-4CB0-BF3F-BE721B7EF89B} = {CCA331EC-1F1E-44F5-A421-8335F7A1997F}
+		{CCBD130E-D339-4AB7-A1BA-B20A9217969F} = {6AE2A46D-71BD-420B-B6A5-E45E55F9BA0A}
+		{2BBD350D-3E25-44F2-8950-9DB3EFAF3E09} = {6AE2A46D-71BD-420B-B6A5-E45E55F9BA0A}
+		{A7B41C13-E956-4D4D-A68F-DB9A9343DEE6} = {11160818-720A-4533-98FD-1F8027D3F6C7}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40230BB9-7A26-4C23-A606-FC1D36F10B93}
+	EndGlobalSection
+EndGlobal
