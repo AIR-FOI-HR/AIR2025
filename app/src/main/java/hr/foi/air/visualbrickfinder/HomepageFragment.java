@@ -3,13 +3,18 @@ package hr.foi.air.visualbrickfinder;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +24,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +58,13 @@ public class HomepageFragment extends Fragment {
         ButterKnife.bind(this,v);
         setButtonAnimation(true);
         requestCameraAndStoragePermission();
+
+        /**@Alen Šobak
+         * Ignores URI exposure
+         * */
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         return  v;
     }
 
@@ -73,6 +89,8 @@ public class HomepageFragment extends Fragment {
     /**
      * @Matej Stojanović
      * Requests camera permission
+     * @Alen Šobak
+     * Reworked to also request storage permission
      */
     private void requestCameraAndStoragePermission() {
         String permissions[] = {
@@ -111,9 +129,18 @@ public class HomepageFragment extends Fragment {
                 setButtonAnimation(false);
             }
 
+            /**@Alen Šobak
+             * Opens camera and saves image in VBF gallery
+             * */
             @Override
             public void onAnimationEnd(Animation animation) {
+                CheckOrCreateGalleryFolder();
                 Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
+                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM+"/VisualBrickFinder");
+                String imageName = setImageName();
+                File imageFile = new File(directory,imageName);
+                Uri imageUri = Uri.fromFile(imageFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
                 startActivityForResult(intent, 100);
             }
 
@@ -126,19 +153,57 @@ public class HomepageFragment extends Fragment {
         btnTakePhoto.startAnimation(animation);
     }
 
+    private String setImageName() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String timestamp = sdf.format(new Date());
+        return "VisualBrickFinderImage" + timestamp +".jpg";
+    }
+
+
     /**
      * @Matej Stojanović
      * Used for handling camera response
+     * @Alen Šobak
+     * On accepting a photo, moves to crop page
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
+        NavController navController = Navigation.findNavController(this.getView());
+
+        if (requestCode == 100 && resultCode==-1) {
+            navController.navigate(R.id.cropPageFragment);
+        }
+        else if (requestCode == 100 && resultCode==0){
             setButtonAnimation(true);
             Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);
             animation.setFillAfter(true);
             btnTakePhoto.startAnimation(animation);
             btnTakePhoto.setImageResource(R.drawable.logo);
         }
+    }
+
+    /**
+     * @Alen Šobak
+     * Creates VisualBrickFinder gallery folder if it doesn't exist
+     */
+    private static void CheckOrCreateGalleryFolder(){
+        File folder = new File(getGalleryPath() + File.separator + "VisualBrickFinder");
+        boolean success = true;
+        if (!folder.exists()) {
+            success = folder.mkdirs();
+        }
+        if (success) {
+             //Do when folder is made successfully
+        } else {
+            // Do something else on failure
+        }
+    }
+
+    /**
+     * @Alen Šobak
+     */
+    private static String getGalleryPath() {
+        return  Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
     }
 }
