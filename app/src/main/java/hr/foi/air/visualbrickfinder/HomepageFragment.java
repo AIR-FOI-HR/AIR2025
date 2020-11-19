@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -41,6 +42,8 @@ public class HomepageFragment extends Fragment {
     @BindView(R.id.activity_main_txt_tap)
     TextView txtTap;
 
+    Uri imageUri;
+
     public HomepageFragment() {
         // Required empty public constructor
     }
@@ -65,7 +68,7 @@ public class HomepageFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-        return  v;
+        return v;
     }
 
     /**
@@ -101,8 +104,7 @@ public class HomepageFragment extends Fragment {
 
         if (ContextCompat.checkSelfPermission(getActivity(), permissions[0]) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(getActivity(), permissions[1]) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(getActivity(), permissions[0]) != PackageManager.PERMISSION_GRANTED)
-        {
+                ContextCompat.checkSelfPermission(getActivity(), permissions[0]) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(),
                     permissions, 101);
         }
@@ -136,11 +138,11 @@ public class HomepageFragment extends Fragment {
             public void onAnimationEnd(Animation animation) {
                 CheckOrCreateGalleryFolder();
                 Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
-                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM+"/VisualBrickFinder");
+                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/VisualBrickFinder");
                 String imageName = setImageName();
-                File imageFile = new File(directory,imageName);
-                Uri imageUri = Uri.fromFile(imageFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                File imageFile = new File(directory, imageName);
+                imageUri = Uri.fromFile(imageFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                 startActivityForResult(intent, 100);
             }
 
@@ -152,11 +154,12 @@ public class HomepageFragment extends Fragment {
         animation.setFillAfter(true);
         btnTakePhoto.startAnimation(animation);
     }
-
+    /**@Alen Šobak
+     * */
     private String setImageName() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String timestamp = sdf.format(new Date());
-        return "VisualBrickFinderImage" + timestamp +".jpg";
+        return "VisualBrickFinderImage" + timestamp + ".jpg";
     }
 
 
@@ -171,10 +174,9 @@ public class HomepageFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         NavController navController = Navigation.findNavController(this.getView());
 
-        if (requestCode == 100 && resultCode==-1) {
-            navController.navigate(R.id.cropPageFragment);
-        }
-        else if (requestCode == 100 && resultCode==0){
+        if (requestCode == 100 && resultCode == -1) {
+            navController.navigate(R.id.cropPageFragment, CreateImageURIBundle());
+        } else if (requestCode == 100 && resultCode == 0) {
             setButtonAnimation(true);
             Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);
             animation.setFillAfter(true);
@@ -185,16 +187,25 @@ public class HomepageFragment extends Fragment {
 
     /**
      * @Alen Šobak
+     */
+    private Bundle CreateImageURIBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putString("imgURI", imageUri.toString());
+        return bundle;
+    }
+
+    /**
+     * @Alen Šobak
      * Creates VisualBrickFinder gallery folder if it doesn't exist
      */
-    private static void CheckOrCreateGalleryFolder(){
+    private static void CheckOrCreateGalleryFolder() {
         File folder = new File(getGalleryPath() + File.separator + "VisualBrickFinder");
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdirs();
         }
         if (success) {
-             //Do when folder is made successfully
+            //Do when folder is made successfully
         } else {
             // Do something else on failure
         }
@@ -204,6 +215,6 @@ public class HomepageFragment extends Fragment {
      * @Alen Šobak
      */
     private static String getGalleryPath() {
-        return  Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
+        return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
     }
 }
