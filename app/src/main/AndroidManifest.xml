@@ -13,6 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VisualBrickFinder">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="hr.foi.air.visualbrickfinder"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <activity android:name=".MainActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".SplashScreenActivity" android:screenOrientation="portrait">
             <intent-filter>

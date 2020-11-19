@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.ListFragment;
 import androidx.navigation.NavController;
@@ -27,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -136,14 +138,15 @@ public class HomepageFragment extends Fragment {
              * */
             @Override
             public void onAnimationEnd(Animation animation) {
-                CheckOrCreateGalleryFolder();
                 Intent intent = new Intent((MediaStore.ACTION_IMAGE_CAPTURE));
-                File directory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/VisualBrickFinder");
+                File directory = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
                 String imageName = setImageName();
-                File imageFile = new File(directory, imageName);
-                imageUri = Uri.fromFile(imageFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                startActivityForResult(intent, 100);
+                File imageFile = new File(directory,imageName);
+                if (imageFile != null){
+                    imageUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName(),imageFile);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, 100);
+                }
             }
 
             @Override
@@ -161,6 +164,8 @@ public class HomepageFragment extends Fragment {
         String timestamp = sdf.format(new Date());
         return "VisualBrickFinderImage" + timestamp + ".jpg";
     }
+
+
 
 
     /**
@@ -194,27 +199,4 @@ public class HomepageFragment extends Fragment {
         return bundle;
     }
 
-    /**
-     * @Alen Šobak
-     * Creates VisualBrickFinder gallery folder if it doesn't exist
-     */
-    private static void CheckOrCreateGalleryFolder() {
-        File folder = new File(getGalleryPath() + File.separator + "VisualBrickFinder");
-        boolean success = true;
-        if (!folder.exists()) {
-            success = folder.mkdirs();
-        }
-        if (success) {
-            //Do when folder is made successfully
-        } else {
-            // Do something else on failure
-        }
-    }
-
-    /**
-     * @Alen Šobak
-     */
-    private static String getGalleryPath() {
-        return Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/";
-    }
 }
