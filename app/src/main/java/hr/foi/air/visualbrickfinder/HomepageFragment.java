@@ -180,7 +180,9 @@ public class HomepageFragment extends Fragment {
         NavController navController = Navigation.findNavController(this.getView());
 
         if (requestCode == 100 && resultCode == -1) {
-            navController.navigate(R.id.cropPageFragment, CreateImageURIBundle());
+            Intent homepageIntent = new Intent(getActivity(), CropPageActivity.class);
+            homepageIntent.putExtra("imgURI",imageUri.toString());
+            startActivity(homepageIntent);
         } else if (requestCode == 100 && resultCode == 0) {
             setButtonAnimation(true);
             Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);
@@ -190,13 +192,6 @@ public class HomepageFragment extends Fragment {
         }
     }
 
-    /**
-     * @Alen Šobak
-     */
-    private Bundle CreateImageURIBundle() {
-        Bundle bundle = new Bundle();
-        bundle.putString("imgURI", imageUri.toString());
-        return bundle;
-    }
+
 
 }

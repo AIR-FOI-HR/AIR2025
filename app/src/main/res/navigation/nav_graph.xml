@@ -10,12 +10,6 @@
         android:name="hr.foi.air.visualbrickfinder.HomepageFragment"
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage" />
-    <fragment
-        android:id="@+id/cropPageFragment"
-        android:name="hr.foi.air.visualbrickfinder.CropPageFragment"
-        android:label="fragment_crop_page"
-        tools:layout="@layout/fragment_crop_page" >
-    </fragment>
 
     <!--Fragment id must be same as menu item id for them to be connected-->
 </navigation>
