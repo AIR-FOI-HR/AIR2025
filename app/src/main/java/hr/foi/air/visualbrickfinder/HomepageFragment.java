@@ -180,9 +180,8 @@ public class HomepageFragment extends Fragment {
         NavController navController = Navigation.findNavController(this.getView());
 
         if (requestCode == 100 && resultCode == -1) {
-            Intent homepageIntent = new Intent(getActivity(), CropPageActivity.class);
-            homepageIntent.putExtra("imgURI",imageUri.toString());
-            startActivity(homepageIntent);
+            ((MainActivity)getActivity()).Prijelaz(imageUri);
+
         } else if (requestCode == 100 && resultCode == 0) {
             setButtonAnimation(true);
             Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);

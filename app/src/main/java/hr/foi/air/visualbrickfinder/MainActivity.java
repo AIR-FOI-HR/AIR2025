@@ -11,6 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -41,7 +42,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setUpNavigation();
+
     }
+
+    public void Prijelaz(Uri imageUri) {
+        Intent homepageIntent = new Intent(this, CropPageActivity.class);
+        homepageIntent.putExtra("imgURI",imageUri.toString());
+        startActivity(homepageIntent);
+    }
+
 
     /**
      * @Alen Sanković

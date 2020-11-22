@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="photo_crop">Photo</string>
+    <string name="recrop_image">ReCrop image</string>
 </resources>

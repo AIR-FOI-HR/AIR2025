@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomepageFragment"
-    android:background="@drawable/app_background">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/activity_main_txt_tap"
@@ -15,7 +15,7 @@
         android:layout_marginBottom="25dp"
         android:fontFamily="@font/roboto_medium"
         android:text="@string/tap_find"
-        android:textColor="@color/colorOpacityWhite"
+        android:textColor="@color/greyWienerberger"
         android:textSize="25sp"
         android:textStyle="bold" />
 

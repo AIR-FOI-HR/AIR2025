@@ -4,37 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F37B2B"
-    tools:context=".CropPageActivity">
+    android:background="@drawable/background"
+    android:fitsSystemWindows="true"
+    tools:context=".CropPageActivity"
 
+    >
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:contentDescription="@string/photo_crop" />
 
-    <Button
-        android:id="@+id/buttonAcceptCropped"
+    <LinearLayout
 
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/imageView"
-        android:layout_marginTop="30dp"
-        android:text="Crop"
-        />
+        android:layout_marginTop="10dp"
+        >
 
-    <Button
-        android:id="@+id/buttonCropAgain"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/imageView"
-        android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/buttonAcceptCropped"
-        android:layout_toRightOf="@id/buttonAcceptCropped"
-        android:text="Refuse"
-        />
+
+        <ImageButton
+            android:id="@+id/buttonAcceptCropped"
+            android:background="@drawable/circular_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/accept_cropped_image"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_accept_crop"
+            />
+
+
+        <ImageButton
+            android:id="@+id/buttonCropAgain"
+            android:background="@drawable/circular_button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/recrop_image"
+            android:src="@drawable/ic_re_crop"
+            />
+    </LinearLayout>
+
 
 </RelativeLayout>
