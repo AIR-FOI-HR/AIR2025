@@ -7,18 +7,16 @@
     android:background="@drawable/background"
     android:fitsSystemWindows="true"
     tools:context=".CropPageActivity"
-
     >
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image_cropped"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
         android:contentDescription="@string/photo_crop" />
 
     <LinearLayout
@@ -26,31 +24,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/imageView"
+        android:layout_below="@id/image_cropped"
         android:layout_marginTop="10dp"
         >
 
 
         <ImageButton
-            android:id="@+id/buttonAcceptCropped"
-            android:background="@drawable/circular_button"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:contentDescription="@string/accept_cropped_image"
+            android:id="@+id/button_accept_cropped"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginRight="20dp"
+            android:background="@drawable/circular_button"
+            android:contentDescription="@string/accept_cropped_image"
             android:src="@drawable/ic_accept_crop"
             />
 
 
         <ImageButton
-            android:id="@+id/buttonCropAgain"
+            android:id="@+id/button_crop_again"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:background="@drawable/circular_button"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
             android:contentDescription="@string/recrop_image"
             android:src="@drawable/ic_re_crop"
             />
+
     </LinearLayout>
 
 

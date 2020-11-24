@@ -26,49 +26,26 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CropPageActivity extends AppCompatActivity {
-    @BindView(R.id.imageView)
+    @BindView(R.id.image_cropped)
     ImageView imageView;
 
-    @BindView(R.id.buttonCropAgain)
+    @BindView(R.id.button_crop_again)
     ImageButton btnCropAgain;
 
-    @BindView(R.id.buttonAcceptCropped)
+    @BindView(R.id.button_accept_cropped)
     ImageButton btnAcceptCrop;
 
-    Uri imageURI = null;
+    static final String IMAGE_URI = "IMAGE_URI";
+
+    Uri imageUri = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_page);
         ButterKnife.bind(this);
-
-        Bundle extras = this.getIntent().getExtras();
-        String imgURI = extras.getString("imgURI");
-        imageURI = Uri.parse(imgURI);
-        CropImage.activity(imageURI).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
-
-    }
-
-    private void onAcceptCrop(Uri resultURI) {
-        String encodedImage = croppedImageToB64(resultURI);
-        Intent homepageIntent = new Intent(this, MainActivity.class);
-        startActivity(homepageIntent);
-    }
-
-    private void onCropAgainClick() {
-        CropImage.activity(imageURI).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
-    }
-
-    /**
-     * @Alen Šobak
-     */
-    private String croppedImageToB64(Uri resultURI) {
-        Bitmap bm = BitmapFactory.decodeFile(resultURI.getPath());
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); // bm is the bitmap object
-        byte[] b = baos.toByteArray();
-        return Base64.encodeToString(b, Base64.DEFAULT);
+        getUriFromCamera();
+        CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
     }
 
 
@@ -92,13 +69,13 @@ public class CropPageActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 assert result != null;
                 Exception error = result.getError();
+                Log.d("MyApp", "file Deleted :" + imageUri.getPath());
             } else if (resultCode == 0) {
                 deleteImageFromStorage();
                 Intent homepageIntent = new Intent(this, MainActivity.class);
                 startActivity(homepageIntent);
             }
         }
-
     }
 
 
@@ -110,16 +87,34 @@ public class CropPageActivity extends AppCompatActivity {
         startActivity(homepageIntent);
     }
 
+
     public void deleteImageFromStorage() {
-        String[] imageName = imageURI.toString().split("/");
+        String[] imageName = imageUri.toString().split("/");
         File directory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/" + imageName[imageName.length - 1]);
         if (directory.exists()) {
             if (directory.delete()) {
-                Log.d("MyApp", "file Deleted :" + imageURI.getPath());
+                Log.d("FileDel", "file Deleted :" + imageUri.getPath());
             } else {
-                Log.d("MyApp", "file not Deleted :" + imageURI.getPath());
+                Log.d("FileDel", "file not Deleted :" + imageUri.getPath());
             }
         } else
-            Log.d("MyApp", "nePostoji");
+            Log.d("FileDel", "nePostoji");
     }
+
+    private void getUriFromCamera() {
+        Bundle extras = this.getIntent().getExtras();
+        String imgURI = extras.getString(IMAGE_URI);
+        imageUri = Uri.parse(imgURI);
+    }
+
+    private void onAcceptCrop(Uri resultUri) {
+        String imageB64 = ImageToB64Class.Convert(resultUri);
+        Intent homepageIntent = new Intent(this, MainActivity.class);
+        startActivity(homepageIntent);
+    }
+
+    private void onCropAgainClick() {
+        CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
+    }
+
 }

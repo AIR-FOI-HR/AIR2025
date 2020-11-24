@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:background="@color/greyWienerberger"
         app:itemIconTint="@color/almostWhiteWienerberger"
-        app:itemRippleColor="@color/colorOpacityWhite"
+        app:itemRippleColor="@color/almostWhiteWienerberger"
         app:itemTextColor="@color/almostWhiteWienerberger"
         app:menu="@menu/main_menu" />
 
