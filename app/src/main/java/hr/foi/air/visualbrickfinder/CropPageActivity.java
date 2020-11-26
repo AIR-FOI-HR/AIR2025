@@ -88,6 +88,8 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
 
+   
+
     public void deleteImageFromStorage() {
         String[] imageName = imageUri.toString().split("/");
         File directory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/" + imageName[imageName.length - 1]);

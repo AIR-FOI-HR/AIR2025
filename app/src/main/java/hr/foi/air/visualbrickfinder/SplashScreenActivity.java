@@ -27,4 +27,5 @@ public class SplashScreenActivity extends AppCompatActivity {
             SplashScreenActivity.this.finish();
         }, 1700);
     }
+
 }

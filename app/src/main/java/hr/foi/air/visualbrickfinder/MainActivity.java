@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     if (grantResults[1] != PackageManager.PERMISSION_GRANTED ||
                             grantResults[2] != PackageManager.PERMISSION_GRANTED)
                         Toast.makeText(this, "Allow storage permission", Toast.LENGTH_SHORT).show();
-                }
-                break;
+                }break;
         }
     }
 
@@ -111,6 +110,5 @@ public class MainActivity extends AppCompatActivity {
         } else
             return true;
     }
-
 
 }

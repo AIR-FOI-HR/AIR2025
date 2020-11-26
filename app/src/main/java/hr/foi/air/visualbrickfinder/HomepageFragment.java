@@ -81,8 +81,6 @@ public class HomepageFragment extends Fragment {
     /**
      * @Matej Stojanović
      * Used for handling camera response
-     * @Alen Šobak
-     * On accepting a photo, moves to crop page
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -97,8 +95,7 @@ public class HomepageFragment extends Fragment {
                     animation.setFillAfter(true);
                     btnTakePhoto.startAnimation(animation);
                     btnTakePhoto.setImageResource(R.drawable.logo);
-                }
-                break;
+                }break;
         }
     }
 
@@ -170,9 +167,7 @@ public class HomepageFragment extends Fragment {
         }
     }
 
-    /**
-     * @Alen Šobak
-     */
+
     private String setImageName() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH);
         String timestamp = sdf.format(new Date());
@@ -180,9 +175,7 @@ public class HomepageFragment extends Fragment {
     }
 
 
-    /**
-     * @Alen Šobak
-     */
+
     private File createImageFile() {
         File directory = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         String imageName = setImageName();
