@@ -44,7 +44,7 @@ public class CropPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crop_page);
         ButterKnife.bind(this);
-        getUriFromCamera();
+        getUri();
         CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
     }
 
@@ -103,7 +103,7 @@ public class CropPageActivity extends AppCompatActivity {
             Log.d("FileDel", "nePostoji");
     }
 
-    private void getUriFromCamera() {
+    private void getUri() {
         Bundle extras = this.getIntent().getExtras();
         String imgURI = extras.getString(IMAGE_URI);
         imageUri = Uri.parse(imgURI);
