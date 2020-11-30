@@ -11,10 +11,5 @@
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage" />
 
-    <fragment
-        android:id="@+id/main_menu_item_gallery"
-        android:name="hr.foi.air.visualbrickfinder.ui.gallery.GalleryFragment"
-        android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
     <!--Fragment id must be same as menu item id for them to be connected-->
 </navigation>
