@@ -1,6 +1,8 @@
 package hr.foi.air.visualbrickfinder;
 
 import androidx.annotation.NonNull;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,13 +11,20 @@ import androidx.navigation.ui.NavigationUI;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+
+
+import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+
+
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_view_btmnav)
     BottomNavigationView btmNav;
 
+    public static Activity activity;
+    private static final int PICK_IMAGE = 100;
     static final String IMAGE_URI = "IMAGE_URI";
+    Uri imageUri;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setUpNavigation();
         requestCameraAndStoragePermission();
+        setGalleryListener();
+        activity=this;
 
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -60,14 +77,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static Intent getStartIntent(Context context, Uri imageUri) {
+    public static Intent getCameraIntent(Context context, Uri imageUri) {
         Intent intent = new Intent(context, CropPageActivity.class);
         intent.putExtra(IMAGE_URI, imageUri.toString());
         return intent;
     }
 
+    public static Intent getGalleryIntent() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        return gallery;
+    }
+
+
     public void goToCropPageActivity(Uri imageUri) {
-        startActivity(getStartIntent(this, imageUri));
+        startActivity(getCameraIntent(this, imageUri));
     }
 
 
@@ -103,4 +126,24 @@ public class MainActivity extends AppCompatActivity {
             return true;
     }
 
+    private void setGalleryListener() {
+        btmNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId()==R.id.main_menu_item_gallery){
+                    startActivityForResult(getGalleryIntent(), PICK_IMAGE);
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            goToCropPageActivity(imageUri);
+        }
+    }
 }

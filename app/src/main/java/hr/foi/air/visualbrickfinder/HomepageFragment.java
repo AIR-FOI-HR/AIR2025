@@ -69,7 +69,9 @@ public class HomepageFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         return v;
+
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -99,6 +101,7 @@ public class HomepageFragment extends Fragment {
     }
 
 
+
     /**
      * @ Alen Sanković
      * Sets pulsing animation on main button and hides elements if param is true
@@ -122,6 +125,7 @@ public class HomepageFragment extends Fragment {
      * @Alen Sanković
      * Synchronizes animation with the speed of opening up camera
      */
+
 
     public static Intent getStartIntent(Uri imageUri) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+
+import android.util.Log;
+
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -63,13 +66,18 @@ public class CropPageActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 assert result != null;
                 Exception error = result.getError();
+                deleteImageFromStorage();
+                MainActivity.activity.finish();
                 Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();
             } else if (resultCode == 0) {
                 deleteImageFromStorage();
+                MainActivity.activity.finish();
                 Intent homepageIntent = new Intent(this, MainActivity.class);
                 startActivity(homepageIntent);
+                finish();
             }
         }
+
     }
 
 
@@ -77,8 +85,10 @@ public class CropPageActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         deleteImageFromStorage();
+        MainActivity.activity.finish();
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
+        finish();
     }
 
 
@@ -98,8 +108,10 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
     private void onAcceptCrop(Uri resultUri) {
+        MainActivity.activity.finish();
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
+        finish();
     }
 
     private void onCropAgainClick() {
