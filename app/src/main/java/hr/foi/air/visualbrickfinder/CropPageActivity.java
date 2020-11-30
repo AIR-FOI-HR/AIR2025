@@ -4,22 +4,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Base64;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import butterknife.BindView;
@@ -69,7 +64,7 @@ public class CropPageActivity extends AppCompatActivity {
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 assert result != null;
                 Exception error = result.getError();
-                Log.d("MyApp", "file Deleted :" + imageUri.getPath());
+                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();
             } else if (resultCode == 0) {
                 deleteImageFromStorage();
                 Intent homepageIntent = new Intent(this, MainActivity.class);
@@ -93,14 +88,8 @@ public class CropPageActivity extends AppCompatActivity {
     public void deleteImageFromStorage() {
         String[] imageName = imageUri.toString().split("/");
         File directory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/" + imageName[imageName.length - 1]);
-        if (directory.exists()) {
-            if (directory.delete()) {
-                Log.d("FileDel", "file Deleted :" + imageUri.getPath());
-            } else {
-                Log.d("FileDel", "file not Deleted :" + imageUri.getPath());
-            }
-        } else
-            Log.d("FileDel", "nePostoji");
+        if (directory.exists())
+            directory.delete();
     }
 
     private void getUri() {
@@ -110,7 +99,6 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
     private void onAcceptCrop(Uri resultUri) {
-        String imageB64 = ImageToB64Class.Convert(resultUri);
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
     }

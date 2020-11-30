@@ -19,7 +19,6 @@ import hr.foi.air.visualbrickfinder.R;
 import static android.app.Activity.RESULT_OK;
 
 public class GalleryFragment extends Fragment {
-    ImageView imageView;
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
 
@@ -29,10 +28,7 @@ public class GalleryFragment extends Fragment {
         openGallery();
     }
 
-    private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -40,7 +36,6 @@ public class GalleryFragment extends Fragment {
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
             ((MainActivity) getActivity()).goToCropPageActivity(imageUri);
-            //imageView.setImageURI(imageUri);
         }
     }
 
@@ -50,5 +45,10 @@ public class GalleryFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         return root;
+    }
+
+    private void openGallery() {
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
     }
 }
