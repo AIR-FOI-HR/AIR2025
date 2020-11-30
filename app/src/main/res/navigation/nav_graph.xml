@@ -16,6 +16,5 @@
         android:name="hr.foi.air.visualbrickfinder.ui.gallery.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
-
     <!--Fragment id must be same as menu item id for them to be connected-->
 </navigation>

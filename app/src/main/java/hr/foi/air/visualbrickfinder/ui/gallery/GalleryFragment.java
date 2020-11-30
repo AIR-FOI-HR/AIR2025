@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import hr.foi.air.visualbrickfinder.HomepageFragment;
 import hr.foi.air.visualbrickfinder.MainActivity;
 import hr.foi.air.visualbrickfinder.R;
 
@@ -20,6 +21,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class GalleryFragment extends Fragment {
     private static final int PICK_IMAGE = 100;
+    private static final int EXIT= 0;
     Uri imageUri;
 
     @Override
@@ -36,6 +38,11 @@ public class GalleryFragment extends Fragment {
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
             ((MainActivity) getActivity()).goToCropPageActivity(imageUri);
+        }
+        else if(resultCode == EXIT){
+            Intent homepageIntent = new Intent(this.getContext(), MainActivity.class);
+            startActivity(homepageIntent);
+            getActivity().finish();
         }
     }
 

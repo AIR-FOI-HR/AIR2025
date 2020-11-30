@@ -71,6 +71,7 @@ public class CropPageActivity extends AppCompatActivity {
                 deleteImageFromStorage();
                 Intent homepageIntent = new Intent(this, MainActivity.class);
                 startActivity(homepageIntent);
+                finish();
             }
         }
     }
@@ -82,6 +83,7 @@ public class CropPageActivity extends AppCompatActivity {
         deleteImageFromStorage();
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
+        finish();
     }
 
 
@@ -103,6 +105,7 @@ public class CropPageActivity extends AppCompatActivity {
     private void onAcceptCrop(Uri resultUri) {
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
+        finish();
     }
 
     private void onCropAgainClick() {

@@ -101,27 +101,6 @@ public class HomepageFragment extends Fragment {
     }
 
 
-    /**
-     * @Matej Stojanović
-     * Used for handling camera response
-     */
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 100:
-                if (resultCode == -1)
-                    ((MainActivity) getActivity()).goToCropPageActivity(imageUri);
-                else if (resultCode == 0) {
-                    setButtonAnimation(true);
-                    Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);
-                    animation.setFillAfter(true);
-                    btnTakePhoto.startAnimation(animation);
-                    btnTakePhoto.setImageResource(R.drawable.logo);
-                }break;
-        }
-    }
-
 
     /**
      * @ Alen Sanković
