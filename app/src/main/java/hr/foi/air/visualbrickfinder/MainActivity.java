@@ -16,8 +16,10 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+
 import android.view.Window;
 import android.view.WindowManager;
+
 
 import android.widget.Toast;
 
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setUpNavigation();
-
         requestCameraAndStoragePermission();
 
     }

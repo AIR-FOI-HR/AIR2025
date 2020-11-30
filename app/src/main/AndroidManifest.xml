@@ -31,7 +31,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+      
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait">

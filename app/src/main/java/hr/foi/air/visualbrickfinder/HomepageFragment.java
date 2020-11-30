@@ -1,6 +1,8 @@
 package hr.foi.air.visualbrickfinder;
 
+
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -67,13 +69,37 @@ public class HomepageFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
         return v;
+
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         btnTakePhoto.setOnClickListener(v -> setCameraAnimation());
     }
+
+    /**
+     * @Matej Stojanović
+     * Used for handling camera response
+     */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 100:
+                if (resultCode == -1)
+                    ((MainActivity) getActivity()).goToCropPageActivity(imageUri);
+                else if (resultCode == 0) {
+                    setButtonAnimation(true);
+                    Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_shrink_anim);
+                    animation.setFillAfter(true);
+                    btnTakePhoto.startAnimation(animation);
+                    btnTakePhoto.setImageResource(R.drawable.logo);
+                }break;
+        }
+    }
+
 
     /**
      * @Matej Stojanović
