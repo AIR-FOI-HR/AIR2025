@@ -21,6 +21,8 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hr.foi.air.webservicefrontend.MyWebserviceCaller;
+
 
 public class CropPageActivity extends AppCompatActivity {
     @BindView(R.id.image_cropped)
@@ -35,6 +37,8 @@ public class CropPageActivity extends AppCompatActivity {
     static final String IMAGE_URI = "IMAGE_URI";
 
     Uri imageUri = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,8 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
     private void onAcceptCrop(Uri resultUri) {
+        MyWebserviceCaller apiCaller = new MyWebserviceCaller();
+        apiCaller.getResponse(this,resultUri);
         MainActivity.activity.finish();
         Intent homepageIntent = new Intent(this, MainActivity.class);
         startActivity(homepageIntent);
