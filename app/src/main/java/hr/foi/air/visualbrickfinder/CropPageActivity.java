@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -28,11 +29,11 @@ public class CropPageActivity extends AppCompatActivity {
     @BindView(R.id.image_cropped)
     ImageView imageView;
 
-    @BindView(R.id.button_crop_again)
-    ImageButton btnCropAgain;
+    @BindView(R.id.btn_crop_again)
+    FloatingActionButton btnCropAgain;
 
-    @BindView(R.id.button_accept_cropped)
-    ImageButton btnAcceptCrop;
+    @BindView(R.id.btn_accept_crop)
+    FloatingActionButton btnAcceptCrop;
 
     static final String IMAGE_URI = "IMAGE_URI";
 

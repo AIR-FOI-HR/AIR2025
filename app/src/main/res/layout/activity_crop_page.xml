@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:fitsSystemWindows="true"
-    tools:context=".CropPageActivity"
-    >
+    tools:context=".CropPageActivity">
 
 
     <ImageView
@@ -28,38 +27,43 @@
         android:gravity="center"
         android:text="@string/title_crop_screen"
         android:textColor="@color/greyWienerberger"
-        android:textSize="32sp"
-        />
+        android:textSize="32sp" />
 
     <LinearLayout
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/image_cropped"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp">
 
-
-        <ImageButton
-            android:id="@+id/button_accept_cropped"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="50dp"
-            android:background="@drawable/circular_button_crop"
+            android:backgroundTint="@color/cherryWienerberger"
             android:contentDescription="@string/accept_cropped_image"
-            android:src="@drawable/ic_accept_crop"
-            />
+            android:src="@mipmap/ic_accept_crop_page"
+            app:borderWidth="0dp"
+            app:elevation="1dp"
+            app:fabCustomSize="75dp"
+            app:maxImageSize="45dp"
+            android:id="@+id/btn_accept_crop"
+            app:pressedTranslationZ="1dp" />
 
-
-        <ImageButton
-            android:id="@+id/button_crop_again"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="@drawable/circular_button_crop"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_crop_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cherryWienerberger"
             android:contentDescription="@string/recrop_image"
-            android:src="@drawable/ic_re_crop"
-            />
+            android:src="@mipmap/ic_crop_again"
+            app:borderWidth="0dp"
+            app:elevation="1dp"
+            app:fabCustomSize="75dp"
+            app:maxImageSize="45dp"
+            app:pressedTranslationZ="1dp" />
+
 
     </LinearLayout>
 
