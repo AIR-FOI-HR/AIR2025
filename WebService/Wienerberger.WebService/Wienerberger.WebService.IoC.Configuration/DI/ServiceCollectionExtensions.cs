@@ -15,6 +15,7 @@ namespace Wienerberger.WebService.IoC.Configuration.DI
             if (services != null)
             {
                 services.AddSingleton<IImageService, ImageService>();
+                services.AddSingleton<IFascadeService, FascadeService>();
             }
         }
 
