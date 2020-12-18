@@ -15,7 +15,7 @@
         <!-- Customize your theme here. -->
 
         <!-- app background -->
-        <item name="colorControlHighlight">@color/colorRippleEffect</item>
+        <item name="colorControlHighlight">@color/almostWhiteWienerberger</item>
         <item name="android:forceDarkAllowed">false</item>
     </style>
 </resources>

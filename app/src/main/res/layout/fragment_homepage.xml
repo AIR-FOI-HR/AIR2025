@@ -33,6 +33,6 @@
         android:layout_centerInParent="true"
         android:background="@drawable/circular_button_main"
         android:contentDescription="@string/wienerberger_logo"
-        android:src="@drawable/logo" />
+        android:src="@drawable/button_main" />
 
 </RelativeLayout>

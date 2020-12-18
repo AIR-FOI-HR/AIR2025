@@ -12,19 +12,28 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,32 +42,64 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-
+    Dialog popUpDialog;
     @BindView(R.id.activity_main_view_btmnav)
     BottomNavigationView btmNav;
-
     public static Activity activity;
     private static final int PICK_IMAGE = 100;
     static final String IMAGE_URI = "IMAGE_URI";
     Uri imageUri;
-
-
-
+    private NavHostFragment navHostFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Removing status bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main);
+        popUpDialog=new Dialog(this);
+        if(isFirstTimeUsingApp()){
+            ShowAndHandlePopUp();
+        }
         ButterKnife.bind(this);
         setUpNavigation();
         requestCameraAndStoragePermission();
-        setGalleryListener();
         activity=this;
+    }
+
+    public boolean isFirstTimeUsingApp(){
+        SharedPreferences preferences = getPreferences(MODE_PRIVATE);
+        boolean ranBefore = preferences.getBoolean("RanBefore", false);
+        if (!ranBefore) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("RanBefore", true);
+            editor.commit();
+        }
+        return !ranBefore;
+    }
+
+    private void ShowAndHandlePopUp() {
+        popUpDialog.setContentView(R.layout.popup_window);
+        popUpDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Window window= popUpDialog.getWindow();
+        WindowManager.LayoutParams popUpParams =window.getAttributes();
+        popUpParams.y=5;
+        window.setAttributes(popUpParams);
+        ((Button) popUpDialog.findViewById(R.id.popup_close)).setOnClickListener(v->closePopUp());
+        ((Button) popUpDialog.findViewById(R.id.popup_show_help)).setOnClickListener(v->openHelp());
+        popUpDialog.show();
+    }
+
+    private void closePopUp() {
+        popUpDialog.dismiss();
+    }
+
+    private void openHelp(){
+        popUpDialog.dismiss();
+        navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_main_menu_item_help);
 
     }
+
 
 
     @Override
@@ -83,10 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 
-    public static Intent getGalleryIntent() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        return gallery;
-    }
+
 
 
     public void goToCropPageActivity(Uri imageUri) {
@@ -99,11 +137,9 @@ public class MainActivity extends AppCompatActivity {
      * Sets Android Navigation and connects it to bottom navigation
      */
     public void setUpNavigation() {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(btmNav, navHostFragment.getNavController());
     }
-
-
     /**
      * @Matej Stojanović
      * Requests camera permission
@@ -124,26 +160,5 @@ public class MainActivity extends AppCompatActivity {
             return false;
         } else
             return true;
-    }
-
-    private void setGalleryListener() {
-        btmNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId()==R.id.main_menu_item_gallery){
-                    startActivityForResult(getGalleryIntent(), PICK_IMAGE);
-                }
-                return false;
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            imageUri = data.getData();
-            goToCropPageActivity(imageUri);
-        }
     }
 }
