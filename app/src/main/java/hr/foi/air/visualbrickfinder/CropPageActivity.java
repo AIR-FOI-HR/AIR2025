@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
-import android.util.Log;
-
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hr.foi.air.webservicefrontend.MyWebserviceCaller;
 
 
 public class CropPageActivity extends AppCompatActivity {
@@ -38,7 +35,6 @@ public class CropPageActivity extends AppCompatActivity {
     static final String IMAGE_URI = "IMAGE_URI";
 
     Uri imageUri = null;
-
 
 
     @Override
@@ -97,8 +93,6 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
 
-   
-
     public void deleteImageFromStorage() {
         String[] imageName = imageUri.toString().split("/");
         File directory = this.getExternalFilesDir(Environment.DIRECTORY_PICTURES + "/" + imageName[imageName.length - 1]);
@@ -113,10 +107,10 @@ public class CropPageActivity extends AppCompatActivity {
     }
 
     private void onAcceptCrop(Uri resultUri) {
-        MyWebserviceCaller apiCaller = new MyWebserviceCaller();
-        apiCaller.getResponse(this,resultUri);
         MainActivity.activity.finish();
         Intent homepageIntent = new Intent(this, MainActivity.class);
+        homepageIntent.putExtra("calling-activity", 1001);
+        homepageIntent.putExtra("uri", resultUri.toString());
         startActivity(homepageIntent);
         finish();
     }

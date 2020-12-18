@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -48,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
     public static Activity activity;
     private static final int PICK_IMAGE = 100;
     static final String IMAGE_URI = "IMAGE_URI";
-    Uri imageUri;
+
+    public Uri imageUri;
     private NavHostFragment navHostFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setUpNavigation();
         requestCameraAndStoragePermission();
+        if (checkCallingActivity()) switchToProductsFragment();
         activity=this;
     }
 
@@ -106,16 +110,33 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case 101:
-                if (grantResults.length > 0) {
-                    if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
-                        Toast.makeText(this, "Allow camera permission", Toast.LENGTH_SHORT).show();
-                    if (grantResults[1] != PackageManager.PERMISSION_GRANTED ||
-                            grantResults[2] != PackageManager.PERMISSION_GRANTED)
-                        Toast.makeText(this, "Allow storage permission", Toast.LENGTH_SHORT).show();
-                }break;
+        if (requestCode == 101) {
+            if (grantResults.length > 0) {
+                if (grantResults[0] != PackageManager.PERMISSION_GRANTED)
+                    Toast.makeText(this, "Allow camera permission", Toast.LENGTH_SHORT).show();
+                if (grantResults[1] != PackageManager.PERMISSION_GRANTED ||
+                        grantResults[2] != PackageManager.PERMISSION_GRANTED)
+                    Toast.makeText(this, "Allow storage permission", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            goToCropPageActivity(imageUri);
+        }
+        else if(resultCode == RESULT_CANCELED){
+            Log.d("AAAAAAAAA", String.valueOf(navHostFragment.getChildFragmentManager().getBackStackEntryCount()));
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(btmNav.getVisibility() == View.GONE) btmNav.setVisibility(View.VISIBLE);
+        super.onBackPressed();
     }
 
     public static Intent getCameraIntent(Context context, Uri imageUri) {
@@ -160,5 +181,16 @@ public class MainActivity extends AppCompatActivity {
             return false;
         } else
             return true;
+    }
+
+
+    private boolean checkCallingActivity(){
+        return getIntent().getIntExtra("calling-activity", 0) == 1001;
+    }
+
+    private void switchToProductsFragment(){
+        imageUri = Uri.parse(getIntent().getStringExtra("uri"));
+        navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_similarProductsFragment);
+        btmNav.setVisibility(View.GONE);
     }
 }

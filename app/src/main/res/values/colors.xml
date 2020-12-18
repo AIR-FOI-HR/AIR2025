@@ -12,10 +12,12 @@
     <color name="cherryWienerberger">#B30000</color>
     <color name="greyWienerberger">#3f3f3f</color>
     <color name="greyWienerbergerRipple">#803f3f3f</color>
+    <color name="greyHeader">#303f3f3f</color>
     <color name="greyWhiteWienerberger">#eeeeee</color>
     <color name="almostWhiteWienerberger">#fcfcfc</color>
     <color name="colorOpacityWhite">#F9C8A7</color>
     <color name="colorRippleEffect">#E6B08C</color>
     <color name="colorPulse">#90F9C8A7</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="greyButtonColor">#d6d7d7</color>
 </resources>

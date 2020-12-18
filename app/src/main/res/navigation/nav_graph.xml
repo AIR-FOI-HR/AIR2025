@@ -11,6 +11,14 @@
         android:label="fragment_homepage"
         tools:layout="@layout/fragment_homepage" >
         <action
+            android:id="@+id/action_homepageFragment_to_similarProductsFragment"
+            app:destination="@id/similarProductsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/similarProductsFragment"
+        android:name="hr.foi.air.visualbrickfinder.SimilarProductsFragment"
+        android:label="fragment_similar_products"
+        tools:layout="@layout/fragment_similar_products" />
             android:id="@+id/action_homepageFragment_to_main_menu_item_help"
             app:destination="@id/main_menu_item_help" />
     </fragment>

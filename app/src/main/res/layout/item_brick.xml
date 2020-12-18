@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="30dp"
+    android:background="@drawable/round_layout"
+    android:backgroundTint="@color/colorTransparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_layout"
+            android:backgroundTint="@color/colorTransparent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_brick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/round_layout"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="8dp"
+                android:text="@string/item_brick_test_name"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/img_brick"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/item_brick_brick_image_description"
+                android:maxWidth="200dp"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/round_layout"
+                android:backgroundTint="@color/colorTransparent">
+                <!-- second button if needed
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_brick_web"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/greyButtonColor"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingTop="10dp"
+                    android:text="@string/item_brick_website_txt"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:layout_alignParentEnd="true"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
+                -->
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_brick_details"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:backgroundTint="@color/greyButtonColor"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingTop="10dp"
+                    android:text="@string/item_brick_details_txt"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
+            </RelativeLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/expandable_brick_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="20dp">
+
+                    <TextView
+                        android:id="@+id/txt_brick_brand_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/item_brick_brand_txt"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_brick_brand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_toEndOf="@id/txt_brick_brand_label"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/item_brick_test_brand"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/txt_brick_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_brick_brand_label"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/item_brick_test_description"
+                        android:textColor="@color/black" />
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>
