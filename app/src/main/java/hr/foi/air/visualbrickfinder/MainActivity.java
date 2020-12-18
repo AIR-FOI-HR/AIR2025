@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
     private void openHelp(){
         popUpDialog.dismiss();
         navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_main_menu_item_help);
-
     }
 
 

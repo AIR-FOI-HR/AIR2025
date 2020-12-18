@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homepageFragment_to_similarProductsFragment"
             app:destination="@id/similarProductsFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_main_menu_item_help"
+            app:destination="@id/main_menu_item_help" />
     </fragment>
     <fragment
         android:id="@+id/similarProductsFragment"
@@ -21,7 +24,6 @@
         tools:layout="@layout/fragment_similar_products" />
             android:id="@+id/action_homepageFragment_to_main_menu_item_help"
             app:destination="@id/main_menu_item_help" />
-    </fragment>
     <fragment
         android:id="@+id/main_menu_item_help"
         android:name="hr.foi.air.visualbrickfinder.HelpFragment"
