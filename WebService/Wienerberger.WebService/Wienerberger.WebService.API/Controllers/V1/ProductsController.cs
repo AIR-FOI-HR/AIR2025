@@ -17,6 +17,7 @@ using System.Threading;
 using Newtonsoft.Json;
 using Nancy.Json;
 using System.Linq;
+using System.Drawing.Imaging;
 
 namespace Wienerberger.WebService.API.Controllers.V1
 {
@@ -58,18 +59,18 @@ namespace Wienerberger.WebService.API.Controllers.V1
         {
             _logger.LogDebug($"ProductsControllers::POST::{getProductsRequest.Base64String}");
 
-            //if (String.IsNullOrEmpty(getProductsRequest.Base64String))
-            //{
-            //    return BadRequest(getProductsRequest);
-            //}
+            if (String.IsNullOrEmpty(getProductsRequest.Base64String))
+            {
+                return BadRequest(getProductsRequest);
+            }
 
-            //Image convertedImage = null;
-            //var successfullConversion = _imageService.TryConvertFromBase64(getProductsRequest.Base64String, ref convertedImage);
+            Image convertedImage = null;
+            var successfullConversion = _imageService.TryConvertFromBase64(getProductsRequest.Base64String, ref convertedImage);
 
-            //if (!successfullConversion)
-            //{
-            //    return UnprocessableEntity(getProductsRequest);
-            //}
+            if (!successfullConversion)
+            {
+                return UnprocessableEntity(getProductsRequest);
+            }
 
             var fascades = await _fascadeService.GetAll();
             string fascadesUrls = "";
@@ -77,6 +78,8 @@ namespace Wienerberger.WebService.API.Controllers.V1
             {
                 fascadesUrls += f.Assets.ToString() + ",";
             }
+
+            convertedImage.Save(@"C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\userImage.jpg", ImageFormat.Png);
 
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = @"C:\Users\Stipe\AppData\Local\Programs\Python\Python37\python.exe";//cmd is full path to python.exe

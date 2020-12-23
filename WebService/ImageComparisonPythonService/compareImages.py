@@ -42,7 +42,7 @@ def compare_colors(rgb1, rgb2):
 
 def main(baseImg, testImagesUrls):
     imgPath = baseImg
-    image = "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\slika1.jpg"
+    image = "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\userImage.jpg"
     base_img_average = get_average_color_base(image)
 
     max_difference = 15
