@@ -95,7 +95,7 @@ namespace Wienerberger.WebService.API.Controllers.V1
                     Console.Write(result);
                 }
             }
-            var results = fascades.FirstOrDefault(f => f.Assets+"\r\n" == result);
+            var results = fascades.Where(f => f.Assets+"\r\n" == result);
 
             return Ok(results);
         }
