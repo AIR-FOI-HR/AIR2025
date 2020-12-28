@@ -2,16 +2,23 @@ package hr.foi.air.webservicefrontend;
 
 
 import android.net.Uri;
+import android.util.Log;
 
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class VbfWebserviceCaller {
-    private final String baseUrl = "http://10.0.2.2:9773";
+    private final String baseUrl = "http://10.0.2.2:9237";
     Retrofit retrofit;
     private final VbfWebserviceHandler vbfWebserviceHandler;
 
@@ -35,38 +42,57 @@ public class VbfWebserviceCaller {
 
         this.vbfWebserviceHandler = vbfWebserviceHandler;
 
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+                .connectTimeout(200, TimeUnit.SECONDS)
+                .readTimeout(200, TimeUnit.SECONDS)
+                .writeTimeout(200, TimeUnit.SECONDS)
+                .build();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
     public void getAllSimilarProducts(Uri uri) {
-
         VbfWebservice serviceApi = retrofit.create(VbfWebservice.class);
-        Call<VbfWebserviceResponse> call = serviceApi.getProducts(new PostRequestObject(B64Converter.Convert(uri)));
-        call.enqueue(new Callback<VbfWebserviceResponse>() {
+        Call<ResponseBody> call = serviceApi.getProducts(new PostRequestObject(B64Converter.Convert(uri)));
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<VbfWebserviceResponse> call, Response<VbfWebserviceResponse> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (!response.isSuccessful()) {
                     switch (response.code()) {
                         case (400):
-                            handleFailure("uri");
+                            handleFailure("failure");
                             break;
                         case (422):
                             handleFailure("corrupted");
                             break;
                     }
                 } else {
-                    handleResponse(response);
+                    switch (response.code()) {
+                        case (200):
+                            try {
+                                handleResponse(response.body().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        case (204):
+                            handleFailure("empty");
+                            break;
+                    }
+
+
                 }
             }
 
             @Override
-            public void onFailure(Call<VbfWebserviceResponse> call, Throwable t) {
-                setMockBrickData();
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //setMockBrickData();
                 //setMockRoofTileData();
-                //handleFailure("failure");
+                handleFailure("failure");
             }
         });
     }
@@ -131,22 +157,45 @@ public class VbfWebserviceCaller {
 
     }
 
-    private void handleResponse(Response<VbfWebserviceResponse> response) {
-        Gson gson = new Gson();
-        if (response.body().getItems().contains("dimensions")) {
-            RoofTile[] roofTiles = gson.fromJson(
-                    response.body().getItems(),
-                    RoofTile[].class
-            );
-            roofTileResponse(roofTiles, response.body().getTimeStamp());
-        } else {
-            Brick[] bricks = gson.fromJson(
-                    response.body().getItems(),
-                    Brick[].class
-            );
-            brickResponse(bricks, response.body().getTimeStamp());
-        }
+    private void handleResponse(String response) throws IOException {
 
+        long tsLong = System.currentTimeMillis()/1000;
+        Gson gson = new Gson();
+
+        if(response.startsWith("[")){
+            if (response.contains("dimensions")) {
+                RoofTile[] roofTiles = gson.fromJson(
+                        response,
+                        RoofTile[].class
+                );
+                roofTileResponse(roofTiles, tsLong);
+            } else {
+                Brick[] bricks = gson.fromJson(
+                        response,
+                        Brick[].class
+                );
+                brickResponse(bricks,tsLong);
+            }
+        }
+        else{
+            if (response.contains("dimensions")) {
+                RoofTile roofTiles = gson.fromJson(
+                        response,
+                        RoofTile.class
+                );
+                RoofTile[] roofTile=new RoofTile[1];
+                roofTile[0] = roofTiles;
+                roofTileResponse(roofTile, tsLong);
+            } else {
+                Brick bricks = gson.fromJson(
+                        response,
+                        Brick.class
+                );
+                Brick[] brick=new Brick[1];
+                brick[0] = bricks;
+                brickResponse(brick,tsLong);
+            }
+        }
     }
 
     private void brickResponse(Brick[] bricks, long timestamp) {

@@ -8,13 +8,13 @@ public class Brick {
     Change serialized name to the field names in json response
      */
 
-    //@SerializedName(value="productName")
+    @SerializedName(value="productName")
     private String name;
-    //@SerializedName(value="productBrand")
+    @SerializedName(value="productBrand")
     private String brand;
-    //@SerializedName(value="teaser")
+    @SerializedName(value="teaser")
     private String description;
-    //@SerializedName(value="assets")
+    @SerializedName(value="assets")
     private String image;
     //private String url;
 

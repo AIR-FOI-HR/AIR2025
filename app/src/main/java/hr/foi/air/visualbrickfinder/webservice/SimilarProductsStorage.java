@@ -73,11 +73,11 @@ public class SimilarProductsStorage {
                     case "failure":
                         msg = "There has been a problem with your request.";
                         break;
-                    case "uri":
-                        msg = "The picture we received was corrupted.";
+                    case "empty":
+                        msg = "No similar products found.";
                         break;
                     case "corrupted":
-                        msg = "There is something wrong with the picture you've sent us";
+                        msg = "There is something wrong with the picture you've sent us.";
                         break;
                 }
                 caller.cantReceiveProducts(msg);
