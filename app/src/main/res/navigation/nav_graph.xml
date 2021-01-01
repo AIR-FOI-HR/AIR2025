@@ -34,6 +34,16 @@
         android:name="hr.foi.air.visualbrickfinder.GalleryFragment"
         android:label="fragment_gallery"
         tools:layout="@layout/fragment_gallery" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="hr.foi.air.visualbrickfinder.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/historyProductsFragment"
+        android:name="hr.foi.air.visualbrickfinder.HistoryProductsFragment"
+        android:label="fragment_history_products"
+        tools:layout="@layout/fragment_history_products" />
 
     <!--Fragment id must be same as menu item id for them to be connected-->
 </navigation>

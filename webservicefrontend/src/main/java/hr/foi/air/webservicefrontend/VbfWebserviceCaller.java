@@ -43,9 +43,9 @@ public class VbfWebserviceCaller {
         this.vbfWebserviceHandler = vbfWebserviceHandler;
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(200, TimeUnit.SECONDS)
-                .readTimeout(200, TimeUnit.SECONDS)
-                .writeTimeout(200, TimeUnit.SECONDS)
+                .connectTimeout(100, TimeUnit.SECONDS)
+                .readTimeout(100, TimeUnit.SECONDS)
+                .writeTimeout(100, TimeUnit.SECONDS)
                 .build();
 
         retrofit = new Retrofit.Builder()
@@ -97,7 +97,7 @@ public class VbfWebserviceCaller {
         });
     }
 
-    private void setMockBrickData() {
+   /* private void setMockBrickData() {
         List<Brick> bricks = new ArrayList<>();
         bricks.add(new Brick(
                 "Ambiente Vulkangrau siva - rustikalna sa šupljinama",
@@ -156,7 +156,7 @@ public class VbfWebserviceCaller {
         );
 
     }
-
+*/
     private void handleResponse(String response) throws IOException {
 
         long tsLong = System.currentTimeMillis()/1000;

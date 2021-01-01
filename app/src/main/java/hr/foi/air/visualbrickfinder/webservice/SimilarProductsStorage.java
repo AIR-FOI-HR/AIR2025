@@ -54,6 +54,7 @@ public class SimilarProductsStorage {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarRoofTiles() in one if needed
         caller.receiveBricks(bricks);
+        //saveProductImages();
     }
 
     private VbfWebserviceHandler productsHandler = new VbfWebserviceHandler() {

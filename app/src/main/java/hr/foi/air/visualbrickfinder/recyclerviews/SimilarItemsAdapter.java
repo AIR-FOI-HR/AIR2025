@@ -21,6 +21,7 @@ import java.util.List;
 
 import hr.foi.air.visualbrickfinder.R;
 import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
+import hr.foi.air.visualbrickfinder.database.Picture;
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
 
@@ -28,17 +29,24 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private List<Brick> brickList;
     private List<RoofTile> roofTileList;
+    private List<Picture> pictureList;
     private ViewGroup viewGroup;
     private int saveHeight;
 
-    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList) {
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList) {
         this.brickList = brickList;
         this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return brickList == null ? 1 : 0;
+       // return brickList == null ? 1 : 0;
+        int type;
+        if(brickList != null) type = 0;
+        else if (roofTileList != null) type = 1;
+        else type = 2;
+        return type;
     }
 
     @NonNull
@@ -50,6 +58,8 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return new BrickViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_brick, parent, false));
             case 1:
                 return new RoofTileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_roof_tile, parent, false)); //TODO: change layout
+            case 2:
+                return new PhotographViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photograph, parent, false));
         }
         return null;
     }
@@ -89,12 +99,26 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 });
                  */
                 break;
+
+            case 2:
+                PhotographViewHolder photographViewHolder = (PhotographViewHolder) holder;
+                Picture currentPicture = pictureList.get(position);
+                photographViewHolder.dateTxt.setText(String.valueOf(currentPicture.getDate()));
+                Picasso.get().load(currentPicture.getImage()).into(photographViewHolder.imageView);
+                photographViewHolder.id.setText(String.valueOf(currentPicture.getId()));
+                break;
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return brickList == null ? roofTileList.size() : brickList.size();
+        //return brickList == null ? roofTileList.size() : brickList.size();
+        int count;
+        if(brickList != null) count=brickList.size();
+        else if (roofTileList != null) count=roofTileList.size();
+        else count=pictureList.size();
+        return count;
     }
 
 

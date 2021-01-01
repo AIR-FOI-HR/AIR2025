@@ -16,14 +16,16 @@ public class Brick {
     private String description;
     @SerializedName(value="assets")
     private String image;
-    //private String url;
+    @SerializedName(value="primaId")
+    private int id;
 
-    public Brick(String name, String brand, String description, String image) {
+
+    public Brick(String name, String brand, String description, String image,Integer id) {
         this.name = name;
         this.brand = brand;
         this.description = description;
         this.image = image;
-        //this.url = url;
+        this.id = id;
     }
 
     @Override
@@ -36,6 +38,9 @@ public class Brick {
                 '}';
     }
 
+    public Integer getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

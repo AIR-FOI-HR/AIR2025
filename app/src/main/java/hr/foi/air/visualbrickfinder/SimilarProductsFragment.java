@@ -65,12 +65,12 @@ public class SimilarProductsFragment extends Fragment {
     }
 
     public void receiveBricks(List<Brick> bricks) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null,null));
         switchLoaderAndListLayout();
     }
 
     public void receiveRoofTiles(List<RoofTile> roofTiles) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles,null));
         switchLoaderAndListLayout();
     }
 
