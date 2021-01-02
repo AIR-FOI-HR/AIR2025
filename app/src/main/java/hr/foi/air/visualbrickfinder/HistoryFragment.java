@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class HistoryFragment extends Fragment {
 
     @BindView(R.id.pictures_recyclerview)
     RecyclerView recyclerViewPictures;
+    private int pictureId;
 
 
     public HistoryFragment() {
@@ -51,10 +53,14 @@ public class HistoryFragment extends Fragment {
 
 
     public void receivePictures(List<Picture> pictures) {
-        recyclerViewPictures.setAdapter(new SimilarItemsAdapter(null, null, pictures));
+        recyclerViewPictures.setAdapter(new SimilarItemsAdapter(null, null, pictures, this));
     }
 
-    public int getProductsWithId(int id){
-        return id;
+    public void getProductsWithId(int id){
+        Bundle bundle = new Bundle();
+        bundle.putInt("id",id);
+        HistoryProductsFragment historyProductsFragment = new HistoryProductsFragment();
+        historyProductsFragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,historyProductsFragment).commit();
     }
 }

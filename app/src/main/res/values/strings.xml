@@ -26,4 +26,5 @@
     <string name="help_take_a_photo"><img src="@drawable/ic_help.png">asd</img></string>
     <string name="search_date">Search date</string>
     <string name="search_history">Search history</string>
+    <string name="products">Products</string>
 </resources>

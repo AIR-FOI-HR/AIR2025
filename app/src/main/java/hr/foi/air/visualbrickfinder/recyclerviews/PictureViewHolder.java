@@ -21,17 +21,17 @@ import hr.foi.air.visualbrickfinder.HistoryFragment;
 import hr.foi.air.visualbrickfinder.MainActivity;
 import hr.foi.air.visualbrickfinder.R;
 
-public class PhotographViewHolder extends RecyclerView.ViewHolder {
+public class PictureViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.txt_search_date)
     TextView dateTxt;
     @BindView(R.id.img_photo)
     ImageView imageView;
-    @BindView(R.id.id)
-    TextView id;
+    int id;
+    HistoryFragment historyFragment;
 
 
-    public PhotographViewHolder(@NonNull View itemView) {
+    public PictureViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(this::onClick);
@@ -39,6 +39,6 @@ public class PhotographViewHolder extends RecyclerView.ViewHolder {
 
 
     public void onClick(View view){
-        Log.d("test",String.valueOf(id.getText()));
+       historyFragment.getProductsWithId(id);
     }
 }

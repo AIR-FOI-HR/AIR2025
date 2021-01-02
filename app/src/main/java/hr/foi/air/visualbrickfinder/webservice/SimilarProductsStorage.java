@@ -48,6 +48,7 @@ public class SimilarProductsStorage {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarBricks() in one if needed
         caller.receiveRoofTiles(roofTiles);
+        //saveProductImages();
     }
 
     private void returnSimilarBricks() {

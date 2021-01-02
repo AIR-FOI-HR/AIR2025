@@ -88,7 +88,7 @@ public class SimilarProductsFragment extends Fragment {
     private void getDataFromApi() {
         MainActivity mainActivity = (MainActivity) getActivity();
         SimilarProductsStorage storage = new SimilarProductsStorage();
-        storage.getProducts(this, mainActivity.imageUri);
+        storage.getProducts(this, mainActivity.cropImageUri);
     }
 
 

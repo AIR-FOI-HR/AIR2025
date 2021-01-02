@@ -1,8 +1,6 @@
 package hr.foi.air.visualbrickfinder.recyclerviews;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
 import android.transition.TransitionManager;
@@ -19,8 +17,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import hr.foi.air.visualbrickfinder.HistoryFragment;
 import hr.foi.air.visualbrickfinder.R;
-import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
 import hr.foi.air.visualbrickfinder.database.Picture;
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
@@ -32,11 +30,19 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<Picture> pictureList;
     private ViewGroup viewGroup;
     private int saveHeight;
+    private HistoryFragment caller;
 
     public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList) {
         this.brickList = brickList;
         this.roofTileList = roofTileList;
         this.pictureList= pictureList;
+    }
+
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, HistoryFragment caller) {
+        this.brickList = brickList;
+        this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
+        this.caller=caller;
     }
 
     @Override
@@ -59,7 +65,7 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case 1:
                 return new RoofTileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_roof_tile, parent, false)); //TODO: change layout
             case 2:
-                return new PhotographViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photograph, parent, false));
+                return new PictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_picture, parent, false));
         }
         return null;
     }
@@ -101,11 +107,12 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 break;
 
             case 2:
-                PhotographViewHolder photographViewHolder = (PhotographViewHolder) holder;
+                PictureViewHolder pictureViewHolder = (PictureViewHolder) holder;
                 Picture currentPicture = pictureList.get(position);
-                photographViewHolder.dateTxt.setText(String.valueOf(currentPicture.getDate()));
-                Picasso.get().load(currentPicture.getImage()).into(photographViewHolder.imageView);
-                photographViewHolder.id.setText(String.valueOf(currentPicture.getId()));
+                pictureViewHolder.dateTxt.setText(String.valueOf(currentPicture.getDate()));
+                Picasso.get().load(currentPicture.getImage()).into(pictureViewHolder.imageView);
+                pictureViewHolder.id=currentPicture.getId();
+                pictureViewHolder.historyFragment=caller;
                 break;
         }
     }

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     static final String IMAGE_URI = "IMAGE_URI";
 
     public Uri imageUri;
+    public Uri cropImageUri;
     private NavHostFragment navHostFragment;
 
     @Override
@@ -188,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchToProductsFragment(){
-        imageUri = Uri.parse(getIntent().getStringExtra("uri"));
+        cropImageUri = Uri.parse(getIntent().getStringExtra("uri"));
         navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_similarProductsFragment);
         btmNav.setVisibility(View.GONE);
     }
