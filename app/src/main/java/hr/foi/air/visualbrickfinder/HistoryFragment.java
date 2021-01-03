@@ -57,10 +57,9 @@ public class HistoryFragment extends Fragment {
     }
 
     public void getProductsWithId(int id){
-        Bundle bundle = new Bundle();
-        bundle.putInt("id",id);
-        HistoryProductsFragment historyProductsFragment = new HistoryProductsFragment();
-        historyProductsFragment.setArguments(bundle);
-        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,historyProductsFragment).commit();
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.switchToHistoryProductsFragment(id);
     }
+
+
 }

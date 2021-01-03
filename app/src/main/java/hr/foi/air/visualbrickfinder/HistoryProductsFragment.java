@@ -34,15 +34,14 @@ public class HistoryProductsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_history_products, container, false);
         ButterKnife.bind(this, v);
-        Bundle bundle = this.getArguments();
-        int id = bundle.getInt("id");
-        getProductsForId(id);
+        getProducts();
         return v;
     }
 
-    private void getProductsForId(int id) {
+    private void getProducts() {
+        MainActivity mainActivity = (MainActivity) getActivity();
         ProductHistoryStorage storage = new ProductHistoryStorage();
-        storage.getProductsForId(this, id);
+        storage.getProductsForId(this, mainActivity.id);
     }
 
 
