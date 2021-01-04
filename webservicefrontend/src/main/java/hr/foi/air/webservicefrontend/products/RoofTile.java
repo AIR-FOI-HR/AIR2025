@@ -6,6 +6,7 @@ public class RoofTile extends Brick {
 
     //@SerializedName(value="dimensions")
     private String dimensions;
+    private String websiteImageUrl;
 
     public RoofTile(String name, String brand, String description, String image, String dimensions, Integer id) {
         super(name, brand, description, image, id);
@@ -27,4 +28,10 @@ public class RoofTile extends Brick {
     public void setDimensions(String dimensions) {
         this.dimensions = dimensions;
     }
+
+    public String getWebsiteImageUrl() {
+        return websiteImageUrl;
+    }
+
+    public void setWebsiteImageUrl(String image) { this.websiteImageUrl = image; }
 }

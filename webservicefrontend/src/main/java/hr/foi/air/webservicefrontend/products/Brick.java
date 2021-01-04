@@ -19,6 +19,8 @@ public class Brick {
     @SerializedName(value="primaId")
     private int id;
 
+    private String websiteImageUrl;
+
 
     public Brick(String name, String brand, String description, String image,Integer id) {
         this.name = name;
@@ -73,6 +75,12 @@ public class Brick {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getWebsiteImageUrl() {
+        return websiteImageUrl;
+    }
+
+    public void setWebsiteImageUrl(String image) { this.websiteImageUrl = image; }
 /*
     public String getUrl() {
         return url;

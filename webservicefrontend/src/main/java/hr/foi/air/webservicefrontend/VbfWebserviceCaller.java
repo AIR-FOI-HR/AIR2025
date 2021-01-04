@@ -162,7 +162,7 @@ public class VbfWebserviceCaller {
         long tsLong = System.currentTimeMillis()/1000;
         Gson gson = new Gson();
 
-        if(response.startsWith("[")){
+        if(response.startsWith("[") && response.contains("primaId") ){
             if (response.contains("dimensions")) {
                 RoofTile[] roofTiles = gson.fromJson(
                         response,
@@ -178,23 +178,7 @@ public class VbfWebserviceCaller {
             }
         }
         else{
-            if (response.contains("dimensions")) {
-                RoofTile roofTiles = gson.fromJson(
-                        response,
-                        RoofTile.class
-                );
-                RoofTile[] roofTile=new RoofTile[1];
-                roofTile[0] = roofTiles;
-                roofTileResponse(roofTile, tsLong);
-            } else {
-                Brick bricks = gson.fromJson(
-                        response,
-                        Brick.class
-                );
-                Brick[] brick=new Brick[1];
-                brick[0] = bricks;
-                brickResponse(brick,tsLong);
-            }
+           handleFailure("empty");
         }
     }
 

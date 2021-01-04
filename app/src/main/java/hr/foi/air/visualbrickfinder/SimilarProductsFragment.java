@@ -1,5 +1,8 @@
 package hr.foi.air.visualbrickfinder;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,15 +10,22 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -69,6 +79,8 @@ public class SimilarProductsFragment extends Fragment {
         switchLoaderAndListLayout();
     }
 
+    
+
     public void receiveRoofTiles(List<RoofTile> roofTiles) {
         recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles,null));
         switchLoaderAndListLayout();
@@ -84,6 +96,8 @@ public class SimilarProductsFragment extends Fragment {
             ((MainActivity) getActivity()).btmNav.setVisibility(View.VISIBLE);
         });
     }
+
+
 
     private void getDataFromApi() {
         MainActivity mainActivity = (MainActivity) getActivity();

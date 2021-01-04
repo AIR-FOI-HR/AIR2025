@@ -4,6 +4,7 @@ package hr.foi.air.visualbrickfinder.recyclerviews;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
 import hr.foi.air.visualbrickfinder.HistoryFragment;
@@ -79,7 +81,7 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 brickViewHolder.nameTxt.setText(currentBrick.getName());
                 brickViewHolder.brandTxt.setText(currentBrick.getBrand());
                 brickViewHolder.descTxt.setText(currentBrick.getDescription());
-                Picasso.get().load(currentBrick.getImage()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
+                Picasso.get().load(currentBrick.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
                 setExpandCollapseAnimation(brickViewHolder.detailsBtn, brickViewHolder.expandableLayout);
                 /*
                 brickViewHolder.webBtn.setOnClickListener(v -> {

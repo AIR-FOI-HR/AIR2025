@@ -11,7 +11,7 @@
         android:checked="false"
         android:enabled="true"
         android:icon="@drawable/ic_favorites"
-        android:title="Favourites"
+        android:title="History"
         />
     <item
         android:id="@+id/main_menu_item_help"
