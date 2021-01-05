@@ -15,18 +15,17 @@ public class Brick {
     @SerializedName(value="teaser")
     private String description;
     @SerializedName(value="assets")
-    private String image;
+    private String websiteImageUrl;
     @SerializedName(value="primaId")
     private int id;
-
-    private String websiteImageUrl;
+    private String localUrl;
 
 
     public Brick(String name, String brand, String description, String image,Integer id) {
         this.name = name;
         this.brand = brand;
         this.description = description;
-        this.image = image;
+        this.websiteImageUrl = image;
         this.id = id;
     }
 
@@ -36,7 +35,7 @@ public class Brick {
                 "name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", description='" + description + '\'' +
-                ", url='" + image + '\'' +
+                ", url='" + websiteImageUrl + '\'' +
                 '}';
     }
 
@@ -68,19 +67,17 @@ public class Brick {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getWebsiteImageUrl() {
         return websiteImageUrl;
     }
 
-    public void setWebsiteImageUrl(String image) { this.websiteImageUrl = image; }
+    public void setWebsiteImageUrl(String image) {
+        this.websiteImageUrl = image;
+    }
+
+    public String getLocalImageUrl() { return localUrl; }
+
+    public void setLocalImageUrl(String image) { this.localUrl = image; }
 /*
     public String getUrl() {
         return url;

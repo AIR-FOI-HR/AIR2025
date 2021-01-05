@@ -24,7 +24,7 @@ public class ProductHistoryStorage {
 
     public void getProductsForId(HistoryProductsFragment caller, int id) {
         this.productCaller=caller;
-        //loadData(); //Implement when database is finished, returns all photographs
+        //loadData(id); //Implement when database is finished, returns all photographs
         setMockProductData(id);
     }
 

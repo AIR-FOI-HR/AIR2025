@@ -34,8 +34,6 @@ public class SimilarProductsStorage {
     private SimilarProductsFragment caller;
 
 
-
-
     public void getProducts(SimilarProductsFragment caller, Uri pictureUri) {
         this.caller = caller;
 
@@ -65,14 +63,14 @@ public class SimilarProductsStorage {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarBricks() in one if needed
         caller.receiveRoofTiles(roofTiles);
-        //saveProductImages();
+        //saveProductImages(roofTiles,caller.imageUriReference);
     }
 
     private void returnSimilarBricks() {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarRoofTiles() in one if needed
         caller.receiveBricks(bricks);
-        //saveProductImages(bricks);
+        //saveProductImages(bricks,caller.imageUriReference);
     }
 
     private VbfWebserviceHandler productsHandler = new VbfWebserviceHandler() {
@@ -109,15 +107,13 @@ public class SimilarProductsStorage {
     private void saveEachProductPhoto() {
         if(bricks==null)
             for (RoofTile roofTile: roofTiles) {
-                roofTile.setWebsiteImageUrl(roofTile.getImage());
-                imageDownload(roofTile.getImage());
-                roofTile.setImage(changeProductDirectory(roofTile.getImage()));
+                imageDownload(roofTile.getWebsiteImageUrl());
+                roofTile.setLocalImageUrl(changeProductDirectory(roofTile.getWebsiteImageUrl()));
             }
         else
             for (Brick brick: bricks) {
-                brick.setWebsiteImageUrl(brick.getImage());
-                imageDownload(brick.getImage());
-                brick.setImage(changeProductDirectory(brick.getImage()));
+                imageDownload(brick.getWebsiteImageUrl());
+                brick.setLocalImageUrl(changeProductDirectory(brick.getWebsiteImageUrl()));
             }
     }
 

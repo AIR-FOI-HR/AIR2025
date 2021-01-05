@@ -43,7 +43,7 @@ public class VbfWebserviceCaller {
         this.vbfWebserviceHandler = vbfWebserviceHandler;
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(100, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(100, TimeUnit.SECONDS)
                 .writeTimeout(100, TimeUnit.SECONDS)
                 .build();

@@ -14,17 +14,19 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:paddingVertical="15dp"
+            android:gravity="center_horizontal"
             android:text="@string/products"
             android:textColor="@color/cherryWienerberger"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:gravity="center_horizontal"/>
+         />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/products_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginBottom="50dp"/>
 
 </LinearLayout>
 

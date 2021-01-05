@@ -98,7 +98,7 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 roofTileViewHolder.brandTxt.setText(currentRoofTile.getBrand());
                 roofTileViewHolder.descTxt.setText(currentRoofTile.getDescription());
                 roofTileViewHolder.dimensionsTxt.setText(currentRoofTile.getDimensions());
-                Picasso.get().load(currentRoofTile.getImage()).into(roofTileViewHolder.imageViewRoofTile);
+                Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).into(roofTileViewHolder.imageViewRoofTile);
                 setExpandCollapseAnimation(roofTileViewHolder.detailsBtn, roofTileViewHolder.expandableLayout);
                 /*
                 roofTileViewHolder.webBtn.setOnClickListener(v -> {

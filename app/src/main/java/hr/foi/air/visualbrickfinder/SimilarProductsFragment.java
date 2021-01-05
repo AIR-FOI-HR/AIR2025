@@ -3,6 +3,7 @@ package hr.foi.air.visualbrickfinder;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -56,6 +57,8 @@ public class SimilarProductsFragment extends Fragment {
     @BindView(R.id.btn_products_try_again)
     MaterialButton btnTryAgain;
 
+    public Uri imageUriReference;
+
     public SimilarProductsFragment() {
         // Required empty public constructor
     }
@@ -101,6 +104,7 @@ public class SimilarProductsFragment extends Fragment {
 
     private void getDataFromApi() {
         MainActivity mainActivity = (MainActivity) getActivity();
+        imageUriReference = mainActivity.imageUri;
         SimilarProductsStorage storage = new SimilarProductsStorage();
         storage.getProducts(this, mainActivity.cropImageUri);
     }
