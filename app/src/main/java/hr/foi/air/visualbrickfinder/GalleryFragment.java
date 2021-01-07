@@ -36,7 +36,6 @@ public class GalleryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
         startActivityForResult(getGalleryIntent(), PICK_IMAGE);
         return v;

@@ -51,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
     static final String IMAGE_URI = "IMAGE_URI";
 
     public Uri imageUri;
+    public Uri cropImageUri;
+    public int id;
     private NavHostFragment navHostFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,14 +185,20 @@ public class MainActivity extends AppCompatActivity {
             return true;
     }
 
+    public void switchToHistoryProductsFragment(int id){
+        this.id=id;
+        navHostFragment.getNavController().navigate(R.id.historyProductsFragment);
+    }
 
     private boolean checkCallingActivity(){
         return getIntent().getIntExtra("calling-activity", 0) == 1001;
     }
 
     private void switchToProductsFragment(){
-        imageUri = Uri.parse(getIntent().getStringExtra("uri"));
+        cropImageUri = Uri.parse(getIntent().getStringExtra("uri"));
         navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_similarProductsFragment);
         btmNav.setVisibility(View.GONE);
     }
+
+
 }

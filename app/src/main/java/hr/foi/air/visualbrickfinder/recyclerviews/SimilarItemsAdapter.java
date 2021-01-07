@@ -1,11 +1,10 @@
 package hr.foi.air.visualbrickfinder.recyclerviews;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,12 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.List;
 
+import hr.foi.air.visualbrickfinder.HistoryFragment;
 import hr.foi.air.visualbrickfinder.R;
-import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
+import hr.foi.air.visualbrickfinder.database.Picture;
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
 
@@ -28,17 +29,32 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private List<Brick> brickList;
     private List<RoofTile> roofTileList;
+    private List<Picture> pictureList;
     private ViewGroup viewGroup;
     private int saveHeight;
+    private HistoryFragment caller;
 
-    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList) {
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList) {
         this.brickList = brickList;
         this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
+    }
+
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, HistoryFragment caller) {
+        this.brickList = brickList;
+        this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
+        this.caller=caller;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return brickList == null ? 1 : 0;
+       // return brickList == null ? 1 : 0;
+        int type;
+        if(brickList != null) type = 0;
+        else if (roofTileList != null) type = 1;
+        else type = 2;
+        return type;
     }
 
     @NonNull
@@ -50,6 +66,8 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return new BrickViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_brick, parent, false));
             case 1:
                 return new RoofTileViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_roof_tile, parent, false)); //TODO: change layout
+            case 2:
+                return new PictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_picture, parent, false));
         }
         return null;
     }
@@ -63,7 +81,7 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 brickViewHolder.nameTxt.setText(currentBrick.getName());
                 brickViewHolder.brandTxt.setText(currentBrick.getBrand());
                 brickViewHolder.descTxt.setText(currentBrick.getDescription());
-                Picasso.get().load(currentBrick.getImage()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
+                Picasso.get().load(currentBrick.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
                 setExpandCollapseAnimation(brickViewHolder.detailsBtn, brickViewHolder.expandableLayout);
                 /*
                 brickViewHolder.webBtn.setOnClickListener(v -> {
@@ -80,7 +98,7 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 roofTileViewHolder.brandTxt.setText(currentRoofTile.getBrand());
                 roofTileViewHolder.descTxt.setText(currentRoofTile.getDescription());
                 roofTileViewHolder.dimensionsTxt.setText(currentRoofTile.getDimensions());
-                Picasso.get().load(currentRoofTile.getImage()).into(roofTileViewHolder.imageViewRoofTile);
+                Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).into(roofTileViewHolder.imageViewRoofTile);
                 setExpandCollapseAnimation(roofTileViewHolder.detailsBtn, roofTileViewHolder.expandableLayout);
                 /*
                 roofTileViewHolder.webBtn.setOnClickListener(v -> {
@@ -89,12 +107,27 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 });
                  */
                 break;
+
+            case 2:
+                PictureViewHolder pictureViewHolder = (PictureViewHolder) holder;
+                Picture currentPicture = pictureList.get(position);
+                pictureViewHolder.dateTxt.setText(String.valueOf(currentPicture.getDate()));
+                Picasso.get().load(currentPicture.getImage()).into(pictureViewHolder.imageView);
+                pictureViewHolder.id=currentPicture.getId();
+                pictureViewHolder.historyFragment=caller;
+                break;
         }
     }
 
+
     @Override
     public int getItemCount() {
-        return brickList == null ? roofTileList.size() : brickList.size();
+        //return brickList == null ? roofTileList.size() : brickList.size();
+        int count;
+        if(brickList != null) count=brickList.size();
+        else if (roofTileList != null) count=roofTileList.size();
+        else count=pictureList.size();
+        return count;
     }
 
 

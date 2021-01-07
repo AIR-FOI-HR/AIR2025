@@ -43,9 +43,9 @@ public class VbfWebserviceCaller {
         this.vbfWebserviceHandler = vbfWebserviceHandler;
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(200, TimeUnit.SECONDS)
-                .readTimeout(200, TimeUnit.SECONDS)
-                .writeTimeout(200, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(100, TimeUnit.SECONDS)
+                .writeTimeout(100, TimeUnit.SECONDS)
                 .build();
 
         retrofit = new Retrofit.Builder()
@@ -97,7 +97,7 @@ public class VbfWebserviceCaller {
         });
     }
 
-    private void setMockBrickData() {
+   /* private void setMockBrickData() {
         List<Brick> bricks = new ArrayList<>();
         bricks.add(new Brick(
                 "Ambiente Vulkangrau siva - rustikalna sa šupljinama",
@@ -156,13 +156,13 @@ public class VbfWebserviceCaller {
         );
 
     }
-
+*/
     private void handleResponse(String response) throws IOException {
 
         long tsLong = System.currentTimeMillis()/1000;
         Gson gson = new Gson();
 
-        if(response.startsWith("[")){
+        if(response.startsWith("[") && response.contains("primaId") ){
             if (response.contains("dimensions")) {
                 RoofTile[] roofTiles = gson.fromJson(
                         response,
@@ -178,23 +178,7 @@ public class VbfWebserviceCaller {
             }
         }
         else{
-            if (response.contains("dimensions")) {
-                RoofTile roofTiles = gson.fromJson(
-                        response,
-                        RoofTile.class
-                );
-                RoofTile[] roofTile=new RoofTile[1];
-                roofTile[0] = roofTiles;
-                roofTileResponse(roofTile, tsLong);
-            } else {
-                Brick bricks = gson.fromJson(
-                        response,
-                        Brick.class
-                );
-                Brick[] brick=new Brick[1];
-                brick[0] = bricks;
-                brickResponse(brick,tsLong);
-            }
+           handleFailure("empty");
         }
     }
 
