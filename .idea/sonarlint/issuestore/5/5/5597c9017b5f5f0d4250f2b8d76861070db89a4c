@@ -1,8 +1,0 @@
-
-H
-java:S1128"-Remove this unused import 'android.util.Log'.(Ô¦Ø²øÿÿÿÿ
-Y
-java:S1128"7Remove this unused import 'android.widget.ImageButton'.(‚ÏÉõÿÿÿÿÿ8ì€æ…ç.
-i
-java:S4042j"NUse "java.nio.file.Files#delete" here for better messages on error conditions.(²­¡Øûÿÿÿÿ
-U	java:S899j";Do something with the "boolean" value returned by "delete".(²­¡Øûÿÿÿÿ
