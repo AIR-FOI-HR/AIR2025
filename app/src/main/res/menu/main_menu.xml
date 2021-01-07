@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_menu_item_gallery"
+        android:checked="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_from_gallery"
+        android:title="Gallery" />
+    <item
+        android:id="@+id/main_menu_item_favorites"
+        android:checked="false"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorites"
+        android:title="Favourites"
+        />
+    <item
+        android:id="@+id/main_menu_item_help"
+        android:checked="false"
+        android:enabled="true"
+        android:icon="@drawable/ic_help"
+        android:title="Help" />
+</menu>

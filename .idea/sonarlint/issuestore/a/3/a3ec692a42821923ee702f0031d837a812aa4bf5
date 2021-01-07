@@ -1,0 +1,21 @@
+
+T
+java:S1128"2Remove this unused import 'android.widget.Button'.(²òıÿÿÿÿ8¿—Ò”ç.
+v
+java:S1450#"TRemove the "mDots" field and declare it as a local variable in the relevant methods.(‰üš¢şÿÿÿÿ8‰ÿô„ç.
+a
+java:S1128"?Remove this unused import 'android.graphics.drawable.Drawable'.(Á‰º„ùÿÿÿÿ8‹¤©‘ç.
+O
+java:S1128"2Remove this unused import 'android.view.MenuItem'.(Ğ¬Ó‘8ì´à“ç.
+\
+java:S1128"?Remove this unused import 'android.content.res.ColorStateList'.(Ç¦µ·8ì´à“ç.
+K
+java:S1128".Remove this unused import 'android.view.Menu'.(£¯Ò…8ì´à“ç.
+U
+java:S1128"3Remove this unused import 'android.graphics.Color'.(øãíòşÿÿÿÿ8ì´à“ç.
+‚
+java:S1450""fRemove the "mHelpFeaturePageAdapter" field and declare it as a local variable in the relevant methods.(À«&8³°Ò”ç.
+£
+java:S11864"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ø´´øÿÿÿÿ8³°Ò”ç.
+£
+java:S1186="€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(™Î«şÿÿÿÿ8³°Ò”ç.

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        app:cardCornerRadius="25dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/help_card_take_a_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Select photo from gallery"
+                android:textSize="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/white"
+                android:background="@color/cherryWienerberger"
+                android:textAlignment="center"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/help_card_photo_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:padding="12dp"
+                    android:text="1. Tap"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_gallery_button"
+                    android:padding="12dp"
+                    android:layout_marginLeft="-15dp"
+                    android:layout_marginRight="-22dp"/>
+                <TextView
+                    android:id="@+id/help_card_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:padding="12dp"
+                    android:text="button to open gallery"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="15dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:padding="12dp"
+                android:layout_marginTop="-5dp"
+                android:text="2. Select a desired photo"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="15dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:padding="12dp"
+                android:layout_marginTop="-5dp"
+                android:text="3. For roof tile recognition, crop picture\n    so it shows only roof tile"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="15dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:padding="12dp"
+                android:layout_marginTop="-5dp"
+                android:text="4. For brick recognition, crop picture\n     so it shows only bricks"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:padding="12dp"
+                    android:text="5. Press"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_send_photo"
+                    android:padding="12dp"
+                    android:layout_marginLeft="-20dp"
+                    android:layout_marginRight="-28dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textSize="15dp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:padding="12dp"
+                    android:text="button for similar products"/>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/help_card_image"
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginTop="-100dp"
+                android:adjustViewBounds="true"
+                android:padding="18dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/help_select_from_gallery" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

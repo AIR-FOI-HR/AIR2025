@@ -1,2 +1,4 @@
+include ':database'
+include ':webservicefrontend'
 include ':app'
 rootProject.name = "VisualBrickFinder"
