@@ -1,0 +1,23 @@
+[
+  {
+    "name": "First brick",
+    "brand": "First brand",
+    "description": "First description",
+    "url" : "First url",
+    "image" : "First image"
+  },
+  {
+    "name": "Second brick",
+    "brand": "Second brand",
+    "description": "Second description",
+    "url" : "Second url",
+    "image" : "Second image"
+  },
+  {
+    "name": "Third brick",
+    "brand": "Third brand",
+    "description": "Third description",
+    "url" : "Third url",
+    "image" : "Third image"
+  }
+]
