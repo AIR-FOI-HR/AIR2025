@@ -7,6 +7,10 @@ import android.net.Uri;
 
 import java.util.List;
 
+import hr.foi.air.database.DAO;
+import hr.foi.air.database.MyDatabase;
+import hr.foi.air.database.entities.Picture;
+import hr.foi.air.database.entities.Product;
 import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
 import hr.foi.air.webservicefrontend.VbfWebserviceCaller;
 import hr.foi.air.webservicefrontend.VbfWebserviceHandler;
@@ -18,6 +22,7 @@ public class SimilarProductsStorage {
     private List<Brick> bricks;
     private List<RoofTile> roofTiles;
     private SimilarProductsFragment caller;
+    private  static DAO dao;
 
     public void getProducts(SimilarProductsFragment caller, Uri pictureUri) {
         this.caller = caller;
@@ -54,6 +59,20 @@ public class SimilarProductsStorage {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarRoofTiles() in one if needed
         caller.receiveBricks(bricks);
+        if(!bricks.isEmpty()) {
+            for (Brick brick: bricks ) {
+                Product productZaUpisUBazu = new Product();
+                productZaUpisUBazu.setProductName(brick.getName());
+                productZaUpisUBazu.setDimensions("Nemamo dimenzije");
+                productZaUpisUBazu.setDescription(brick.getDescription());
+                productZaUpisUBazu.setFlagFavorite(1);
+                productZaUpisUBazu.setProductImage(brick.getImage());
+                productZaUpisUBazu.setApiProductId(125);
+                dao = MyDatabase.getInstance(caller.getContext()).getDAO();
+                productZaUpisUBazu.setId((int) dao.insertProducts(productZaUpisUBazu)[0]);
+            }
+
+        }
     }
 
     private VbfWebserviceHandler productsHandler = new VbfWebserviceHandler() {
