@@ -5,32 +5,42 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import hr.foi.air.database.DAO;
+import hr.foi.air.database.MyDatabase;
+import hr.foi.air.database.entities.Picture;
+import hr.foi.air.database.entities.Product;
 import hr.foi.air.visualbrickfinder.HistoryFragment;
 import hr.foi.air.visualbrickfinder.HistoryProductsFragment;
 import hr.foi.air.webservicefrontend.products.Brick;
+import hr.foi.air.webservicefrontend.products.RoofTile;
 
 public class ProductHistoryStorage {
 
     private HistoryFragment pictureCaller;
     private HistoryProductsFragment productCaller;
+    private  static DAO dao;
 
     public void getPictures(HistoryFragment caller) {
         this.pictureCaller=caller;
-        //loadData(); //Implement when database is finished, returns all photographs
-        setMockPictureData();
+        dao = MyDatabase.getInstance(pictureCaller.getContext()).getDAO();
+        returnPictures(dao.loadAllPictures()); //Implement when database is finished, returns all photographs
+        //setMockPictureData();
     }
 
     public void getProductsForId(HistoryProductsFragment caller, int id) {
         this.productCaller=caller;
+        dao = MyDatabase.getInstance(productCaller.getContext()).getDAO();
+        returnProducts(dao.loadRelevantProducts(id));
         //loadData(id); //Implement when database is finished, returns all photographs
-        setMockProductData(id);
+        //setMockProductData(id);
     }
 
 
 
-    private void setMockPictureData() {
+  /*  private void setMockPictureData() {
         String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
         List<Picture> pictures = new ArrayList<>();
         pictures.add(new Picture(
@@ -106,12 +116,40 @@ public class ProductHistoryStorage {
 
         }
     }
-
+*/
 
     private void returnPictures(List<Picture> pictures) {
         pictureCaller.receivePictures(pictures);
     }
-    private void returnProducts(List<Brick> bricks) {
-        productCaller.receiveProducts(bricks);
+
+    private void returnProducts(List<Product> products) {
+        Product firstProduct = products.get(0);
+
+        if(firstProduct.getDimensions()==null){
+            List<Brick> bricks = new ArrayList<>();
+            for (Product product:products) {
+                Brick newBrick = new Brick(
+                        product.getProductName(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        null,
+                        product.getId());
+                newBrick.setLocalImageUrl(product.getProductImage());
+                bricks.add(newBrick);
+            }
+            productCaller.receiveProducts(bricks);
+        }
+        else{
+            List<RoofTile> roofTIles = new ArrayList<>();
+        }
+/*
+        List<Brick> brick = new ArrayList<>();
+        brick.add(new Brick(
+                firstProduct.getProductName(),
+                firstProduct.getBrand(),
+                firstProduct.getDescription(),
+                firstProduct.getProductImage(),
+                firstProduct.getId()));
+       productCaller.receiveProducts(brick);*/
     }
 }

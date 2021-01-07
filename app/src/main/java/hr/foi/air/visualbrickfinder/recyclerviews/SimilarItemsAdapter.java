@@ -14,14 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
 
+import hr.foi.air.database.entities.Picture;
 import hr.foi.air.visualbrickfinder.HistoryFragment;
 import hr.foi.air.visualbrickfinder.R;
-import hr.foi.air.visualbrickfinder.database.Picture;
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
 
@@ -81,7 +82,17 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 brickViewHolder.nameTxt.setText(currentBrick.getName());
                 brickViewHolder.brandTxt.setText(currentBrick.getBrand());
                 brickViewHolder.descTxt.setText(currentBrick.getDescription());
-                Picasso.get().load(currentBrick.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
+                File file = new File(currentBrick.getLocalImageUrl());
+                Picasso.get().load(file).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get().load(currentBrick.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick);
+                    }
+                });
                 setExpandCollapseAnimation(brickViewHolder.detailsBtn, brickViewHolder.expandableLayout);
                 /*
                 brickViewHolder.webBtn.setOnClickListener(v -> {
@@ -111,8 +122,8 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case 2:
                 PictureViewHolder pictureViewHolder = (PictureViewHolder) holder;
                 Picture currentPicture = pictureList.get(position);
-                pictureViewHolder.dateTxt.setText(String.valueOf(currentPicture.getDate()));
-                Picasso.get().load(currentPicture.getImage()).into(pictureViewHolder.imageView);
+                pictureViewHolder.dateTxt.setText(String.valueOf(currentPicture.getPictureDate()));
+                Picasso.get().load(currentPicture.getImageUri()).into(pictureViewHolder.imageView);
                 pictureViewHolder.id=currentPicture.getId();
                 pictureViewHolder.historyFragment=caller;
                 break;

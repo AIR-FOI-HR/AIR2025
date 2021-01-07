@@ -18,7 +18,7 @@ public class Brick {
     private String websiteImageUrl;
     @SerializedName(value="primaId")
     private int id;
-    private String localUrl;
+    private String localUrl = "";
 
 
     public Brick(String name, String brand, String description, String image,Integer id) {

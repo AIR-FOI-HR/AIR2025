@@ -4,10 +4,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 
+import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -111,9 +114,12 @@ public class CropPageActivity extends AppCompatActivity {
         Intent homepageIntent = new Intent(this, MainActivity.class);
         homepageIntent.putExtra("calling-activity", 1001);
         homepageIntent.putExtra("uri", resultUri.toString());
+        homepageIntent.putExtra("uriPhoto", imageUri.toString());
         startActivity(homepageIntent);
         finish();
     }
+
+
 
     private void onCropAgainClick() {
         CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);

@@ -14,9 +14,16 @@
         android:title="History"
         />
     <item
+        android:id="@+id/main_menu_item_favorites"
+        android:checked="false"
+        android:enabled="true"
+        android:icon="@drawable/ic_help"
+        android:title="Help" />
+    <item
         android:id="@+id/main_menu_item_help"
         android:checked="false"
         android:enabled="true"
         android:icon="@drawable/ic_help"
         android:title="Help" />
+
 </menu>

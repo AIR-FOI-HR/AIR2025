@@ -18,13 +18,16 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hr.foi.air.database.DAO;
 import hr.foi.air.database.MyDatabase;
 import hr.foi.air.database.entities.Picture;
 import hr.foi.air.database.entities.Product;
+import hr.foi.air.database.entities.Results;
 import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
 import hr.foi.air.webservicefrontend.VbfWebserviceCaller;
 import hr.foi.air.webservicefrontend.VbfWebserviceHandler;
@@ -33,10 +36,11 @@ import hr.foi.air.webservicefrontend.products.RoofTile;
 
 public class SimilarProductsStorage {
 
+    private  static DAO dao;
     private List<Brick> bricks;
     private List<RoofTile> roofTiles;
     private SimilarProductsFragment caller;
-    private  static DAO dao;
+    private long insertionTimestamp;
 
 
     public void getProducts(SimilarProductsFragment caller, Uri pictureUri) {
@@ -68,27 +72,68 @@ public class SimilarProductsStorage {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarBricks() in one if needed
         caller.receiveRoofTiles(roofTiles);
-        //saveProductImages(roofTiles,caller.imageUriReference);
+        saveProductImagesRoofTiles(roofTiles,caller.imageUriReference);
     }
+
+
 
     private void returnSimilarBricks() {
         //Here you can handle updating local database later on
         //Merge this and returnSimilarRoofTiles() in one if needed
         caller.receiveBricks(bricks);
-        //saveProductImages(bricks,caller.imageUriReference);
-        if(!bricks.isEmpty()) {
-            for (Brick brick: bricks ) {
-                Product productZaUpisUBazu = new Product();
-                productZaUpisUBazu.setProductName(brick.getName());
-                productZaUpisUBazu.setDimensions("Nemamo dimenzije");
-                productZaUpisUBazu.setDescription(brick.getDescription());
-                productZaUpisUBazu.setFlagFavorite(1);
-                productZaUpisUBazu.setProductImage(brick.getImage());
-                productZaUpisUBazu.setApiProductId(125);
-                dao = MyDatabase.getInstance(caller.getContext()).getDAO();
-                productZaUpisUBazu.setId((int) dao.insertProducts(productZaUpisUBazu)[0]);
-            }
+        saveProductImagesBricks(bricks,caller.imageUriReference);
+    }
 
+
+    private void saveProductImagesBricks(List<Brick> bricks, Uri imageUriReference) {
+        dao = MyDatabase.getInstance(caller.getContext()).getDAO();
+
+        Picture insertionPicture = new Picture();
+        insertionPicture.setImageUri(imageUriReference.toString());
+        insertionPicture.setPictureDate(new Date(insertionTimestamp));
+        insertionPicture.setId((int)dao.insertPictures(insertionPicture)[0]);;
+
+        for (Brick brick: bricks ) {
+            Product insertionProduct = new Product();
+            insertionProduct.setId(brick.getId());
+            insertionProduct.setProductName(brick.getName());
+            insertionProduct.setDimensions(null);
+            insertionProduct.setBrand(brick.getBrand());
+            insertionProduct.setDescription(brick.getDescription());
+            insertionProduct.setFlagFavorite(0);
+            insertionProduct.setProductImage(brick.getLocalImageUrl());
+            dao.insertProducts(insertionProduct);
+            Results result = new Results();
+            result.setIdPicture(insertionPicture.getId());
+            result.setIdProduct(insertionProduct.getId());
+            dao.insertResults(result);
+        }
+
+    }
+
+    private void saveProductImagesRoofTiles(List<RoofTile> roofTiles, Uri imageUriReference) {
+
+        dao = MyDatabase.getInstance(caller.getContext()).getDAO();
+
+        Picture insertionPicture = new Picture();
+        insertionPicture.setImageUri(imageUriReference.toString());
+        insertionPicture.setPictureDate(new Date(insertionTimestamp));
+        insertionPicture.setId((int)dao.insertPictures(insertionPicture)[0]);;
+
+        for (RoofTile roofTile: roofTiles ) {
+            Product insertionProduct = new Product();
+            insertionProduct.setId(roofTile.getId());
+            insertionProduct.setProductName(roofTile.getName());
+            insertionProduct.setDimensions(roofTile.getDimensions());
+            insertionProduct.setBrand(roofTile.getBrand());
+            insertionProduct.setDescription(roofTile.getDescription());
+            insertionProduct.setFlagFavorite(0);
+            insertionProduct.setProductImage(roofTile.getLocalImageUrl());
+            dao.insertProducts(insertionProduct);
+            Results result = new Results();
+            result.setIdPicture(insertionPicture.getId());
+            result.setIdProduct(insertionProduct.getId());
+            dao.insertResults(result);
         }
     }
 
@@ -96,6 +141,7 @@ public class SimilarProductsStorage {
         @Override
         public void onDataArrived(Object result, boolean ok, long timeStamp, String product) {
             if (ok) {
+                insertionTimestamp=timeStamp;
                 if (product.equals("brick")) {
                     bricks = (List<Brick>) result;
                     saveEachProductPhoto();
@@ -138,14 +184,15 @@ public class SimilarProductsStorage {
 
 
     private void imageDownload(String image) {
-        Picasso.get().load(image).into(getTarget(image));
+        Target target =getTarget(image);
+        Picasso.get().load(image).into(target);
     }
 
     private Target getTarget(String image) {
-        String[] imageName = image.split("/");
         return new Target(){
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                String[] imageName = image.split("/");
                 File file = new File(caller.getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()+"/"+imageName[imageName.length - 1]);
                 if(!file.exists()){
                     try {
@@ -166,6 +213,7 @@ public class SimilarProductsStorage {
 
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
+
             }
         };
 

@@ -33,7 +33,8 @@ public interface DAO {
     @Query("SELECT * FROM pictures")
     public List<Picture> loadAllPictures();
 
-    @Query("SELECT * FROM pictures WHERE id = :pictureId")
-    public List<Picture> loadPicture(int pictureId);
+    @Query("SELECT * FROM products JOIN results ON products.id = results.idProduct WHERE results.idPicture = :pictureId")
+    public List<Product> loadRelevantProducts(int pictureId);
+
 
 }

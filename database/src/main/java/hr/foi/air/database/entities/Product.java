@@ -8,17 +8,21 @@ import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "products")
 public class Product {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     int id;
     @NotNull
     String productName = "pocetnoIme";
+
+
+
+    String brand;
     String dimensions;
     String description;
     @NotNull
     int flagFavorite = 22;
     @NotNull
     String productImage = "pocetnoImeSlike";
-    int apiProductId;
+
 
     public int getId() {
         return id;
@@ -70,12 +74,12 @@ public class Product {
     public void setProductImage(@NotNull String productImage) {
         this.productImage = productImage;
     }
-
-    public int getApiProductId() {
-        return apiProductId;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setApiProductId(int apiProductId) {
-        this.apiProductId = apiProductId;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
+
 }

@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void switchToProductsFragment(){
         cropImageUri = Uri.parse(getIntent().getStringExtra("uri"));
+        imageUri = Uri.parse(getIntent().getStringExtra("uriPhoto"));
         navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_similarProductsFragment);
         btmNav.setVisibility(View.GONE);
     }

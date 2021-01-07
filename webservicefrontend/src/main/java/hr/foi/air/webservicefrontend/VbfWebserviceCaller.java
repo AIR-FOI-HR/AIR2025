@@ -159,7 +159,7 @@ public class VbfWebserviceCaller {
 */
     private void handleResponse(String response) throws IOException {
 
-        long tsLong = System.currentTimeMillis()/1000;
+        long tsLong = System.currentTimeMillis();
         Gson gson = new Gson();
 
         if(response.startsWith("[") && response.contains("primaId") ){

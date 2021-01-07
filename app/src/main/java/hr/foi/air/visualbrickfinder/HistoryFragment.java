@@ -14,7 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import hr.foi.air.visualbrickfinder.database.Picture;
+import hr.foi.air.database.entities.Picture;
 import hr.foi.air.visualbrickfinder.database.ProductHistoryStorage;
 import hr.foi.air.visualbrickfinder.recyclerviews.SimilarItemsAdapter;
 import hr.foi.air.visualbrickfinder.webservice.SimilarProductsStorage;
@@ -55,6 +55,7 @@ public class HistoryFragment extends Fragment {
     public void receivePictures(List<Picture> pictures) {
         recyclerViewPictures.setAdapter(new SimilarItemsAdapter(null, null, pictures, this));
     }
+
 
     public void getProductsWithId(int id){
         MainActivity mainActivity = (MainActivity) getActivity();
