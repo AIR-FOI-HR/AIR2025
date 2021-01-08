@@ -2,6 +2,7 @@ package hr.foi.air.visualbrickfinder;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,9 +14,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.io.File;
 
 
 public class GalleryFragment extends Fragment {
@@ -47,11 +51,28 @@ public class GalleryFragment extends Fragment {
         if (requestCode == PICK_IMAGE) {
             MainActivity mainActivity = (MainActivity) getActivity();
             if (resultCode == Activity.RESULT_OK){
-                mainActivity.imageUri = data.getData();
+                mainActivity.imageUri = getRealPathFromGalleryUri(mainActivity,data.getData());
                 mainActivity.goToCropPageActivity(mainActivity.imageUri);
             }
             NavController controller = Navigation.findNavController(getView());
             controller.popBackStack();
         }
     }
+
+    private Uri getRealPathFromGalleryUri(Activity activity, Uri contentURI) {
+        String result;
+        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        File file = new File(result);
+        if(file.exists()) Log.d("TAG", "postoji: ");
+        return Uri.parse(Uri.fromFile(file).toString());
+    }
+
 }

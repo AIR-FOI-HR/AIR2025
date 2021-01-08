@@ -30,7 +30,7 @@ public interface DAO {
     @Update public void updateResults(Results... results);
     @Delete public void deleteResults(Results... results);
 
-    @Query("SELECT * FROM pictures")
+    @Query("SELECT * FROM pictures ORDER BY pictureDate DESC")
     public List<Picture> loadAllPictures();
 
     @Query("SELECT * FROM products JOIN results ON products.id = results.idProduct WHERE results.idPicture = :pictureId")

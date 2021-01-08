@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class RoofTile extends Brick {
 
-    //@SerializedName(value="dimensions")
+    @SerializedName(value="dimensions")
     private String dimensions;
 
     public RoofTile(String name, String brand, String description, String image, String dimensions, Integer id) {

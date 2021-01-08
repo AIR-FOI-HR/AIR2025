@@ -137,19 +137,21 @@ public class ProductHistoryStorage {
                 newBrick.setLocalImageUrl(product.getProductImage());
                 bricks.add(newBrick);
             }
-            productCaller.receiveProducts(bricks);
+            productCaller.receiveProductsBricks(bricks); }
+        else {
+            List<RoofTile> roofTiles = new ArrayList<>();
+            for (Product product : products) {
+                RoofTile newRoofTile = new RoofTile(
+                        product.getProductName(),
+                        product.getBrand(),
+                        product.getDescription(),
+                        null,
+                        product.getDimensions(),
+                        product.getId());
+                newRoofTile.setLocalImageUrl(product.getProductImage());
+                roofTiles.add(newRoofTile);
+            }
+            productCaller.receiveProductsRoofTiles(roofTiles);
         }
-        else{
-            List<RoofTile> roofTIles = new ArrayList<>();
-        }
-/*
-        List<Brick> brick = new ArrayList<>();
-        brick.add(new Brick(
-                firstProduct.getProductName(),
-                firstProduct.getBrand(),
-                firstProduct.getDescription(),
-                firstProduct.getProductImage(),
-                firstProduct.getId()));
-       productCaller.receiveProducts(brick);*/
     }
 }

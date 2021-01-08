@@ -3,6 +3,7 @@ package hr.foi.air.visualbrickfinder.webservice;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -18,6 +19,7 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +43,11 @@ public class SimilarProductsStorage {
     private List<RoofTile> roofTiles;
     private SimilarProductsFragment caller;
     private long insertionTimestamp;
+    private Context context;
+
+    public SimilarProductsStorage(Context context) {
+        this.context=context;
+    }
 
 
     public void getProducts(SimilarProductsFragment caller, Uri pictureUri) {
@@ -184,27 +191,34 @@ public class SimilarProductsStorage {
 
 
     private void imageDownload(String image) {
-        Target target =getTarget(image);
-        Picasso.get().load(image).into(target);
+        saveImageToStorage(image);
     }
+
+    private void saveImageToStorage(String image) {
+        Picasso.get().load(image).into(getTarget(image));
+    }
+
+
+
 
     private Target getTarget(String image) {
         return new Target(){
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                String[] imageName = image.split("/");
-                File file = new File(caller.getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()+"/"+imageName[imageName.length - 1]);
-                if(!file.exists()){
-                    try {
-                        file.createNewFile();
-                        FileOutputStream ostream = new FileOutputStream(file);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
-                        ostream.flush();
-                        ostream.close();
-                    } catch (IOException e) {
-                        Log.e("IOException", e.getLocalizedMessage());
-                    }
-                }
+                new Thread(() -> {
+                    String[] imageName = image.split("/");
+                    File file = new File(caller.getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()+"/"+imageName[imageName.length - 1]);
+                        try {
+                            file.createNewFile();
+                            FileOutputStream ostream = new FileOutputStream(file);
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, ostream);
+                            ostream.flush();
+                            ostream.close();
+                        } catch (IOException e) {
+                            Log.e("IOException", e.getLocalizedMessage());
+                        }
+
+                }).start();
             }
 
             @Override

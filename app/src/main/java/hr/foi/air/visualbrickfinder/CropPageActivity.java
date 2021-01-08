@@ -72,7 +72,7 @@ public class CropPageActivity extends AppCompatActivity {
                 Exception error = result.getError();
                 deleteImageFromStorage();
                 MainActivity.activity.finish();
-                Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, error.toString(), Toast.LENGTH_LONG).show();
             } else if (resultCode == 0) {
                 deleteImageFromStorage();
                 MainActivity.activity.finish();
@@ -119,10 +119,11 @@ public class CropPageActivity extends AppCompatActivity {
         finish();
     }
 
-
-
     private void onCropAgainClick() {
         CropImage.activity(imageUri).setGuidelines(CropImageView.Guidelines.ON).setMultiTouchEnabled(true).start(this);
     }
+
+
+
 
 }

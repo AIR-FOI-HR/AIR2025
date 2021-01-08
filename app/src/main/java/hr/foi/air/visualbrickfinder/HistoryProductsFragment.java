@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import hr.foi.air.visualbrickfinder.database.ProductHistoryStorage;
 import hr.foi.air.visualbrickfinder.recyclerviews.SimilarItemsAdapter;
 import hr.foi.air.webservicefrontend.products.Brick;
+import hr.foi.air.webservicefrontend.products.RoofTile;
 
 
 public class HistoryProductsFragment extends Fragment {
@@ -45,7 +46,10 @@ public class HistoryProductsFragment extends Fragment {
     }
 
 
-    public void receiveProducts(List<Brick> bricks) {
+    public void receiveProductsBricks(List<Brick> bricks) {
         recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null, null));
+    }
+    public void receiveProductsRoofTiles(List<RoofTile> roofTiles) {
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles, null));
     }
 }

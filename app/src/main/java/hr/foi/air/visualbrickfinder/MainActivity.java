@@ -18,12 +18,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -148,8 +150,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public void goToCropPageActivity(Uri imageUri) {
         startActivity(getCameraIntent(this, imageUri));
     }
@@ -200,6 +200,4 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment.getNavController().navigate(R.id.action_homepageFragment_to_similarProductsFragment);
         btmNav.setVisibility(View.GONE);
     }
-
-
 }
