@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Brick {
 
-    /*
-    Change serialized name to the field names in json response
-     */
 
     @SerializedName(value="productName")
     private String name;

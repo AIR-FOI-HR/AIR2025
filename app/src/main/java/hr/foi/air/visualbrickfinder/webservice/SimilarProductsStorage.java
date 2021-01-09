@@ -1,9 +1,7 @@
 package hr.foi.air.visualbrickfinder.webservice;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,17 +9,12 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-import androidx.fragment.app.FragmentActivity;
-
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -72,12 +65,7 @@ public class SimilarProductsStorage {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    /*
-    These two methods are here only for future database improvements
-     */
     private void returnSimilarRoofTiles() {
-        //Here you can handle updating local database later on
-        //Merge this and returnSimilarBricks() in one if needed
         caller.receiveRoofTiles(roofTiles);
         saveProductImagesRoofTiles(roofTiles,caller.imageUriReference);
     }
@@ -85,8 +73,6 @@ public class SimilarProductsStorage {
 
 
     private void returnSimilarBricks() {
-        //Here you can handle updating local database later on
-        //Merge this and returnSimilarRoofTiles() in one if needed
         caller.receiveBricks(bricks);
         saveProductImagesBricks(bricks,caller.imageUriReference);
     }
@@ -109,6 +95,7 @@ public class SimilarProductsStorage {
             insertionProduct.setDescription(brick.getDescription());
             insertionProduct.setFlagFavorite(0);
             insertionProduct.setProductImage(brick.getLocalImageUrl());
+            insertionProduct.setProductWebsiteImage(brick.getWebsiteImageUrl());
             dao.insertProducts(insertionProduct);
             Results result = new Results();
             result.setIdPicture(insertionPicture.getId());
@@ -136,6 +123,7 @@ public class SimilarProductsStorage {
             insertionProduct.setDescription(roofTile.getDescription());
             insertionProduct.setFlagFavorite(0);
             insertionProduct.setProductImage(roofTile.getLocalImageUrl());
+            insertionProduct.setProductWebsiteImage(roofTile.getWebsiteImageUrl());
             dao.insertProducts(insertionProduct);
             Results result = new Results();
             result.setIdPicture(insertionPicture.getId());
@@ -180,12 +168,12 @@ public class SimilarProductsStorage {
         if(bricks==null)
             for (RoofTile roofTile: roofTiles) {
                 imageDownload(roofTile.getWebsiteImageUrl());
-                roofTile.setLocalImageUrl(changeProductDirectory(roofTile.getWebsiteImageUrl()));
+                roofTile.setLocalImageUrl(getProductDirectory(roofTile.getWebsiteImageUrl()));
             }
         else
             for (Brick brick: bricks) {
                 imageDownload(brick.getWebsiteImageUrl());
-                brick.setLocalImageUrl(changeProductDirectory(brick.getWebsiteImageUrl()));
+                brick.setLocalImageUrl(getProductDirectory(brick.getWebsiteImageUrl()));
             }
     }
 
@@ -234,7 +222,7 @@ public class SimilarProductsStorage {
 
     }
 
-    private String changeProductDirectory(String image) {
+    private String getProductDirectory(String image) {
         String[] imageName = image.split("/");
         return caller.getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES).getPath()+"/"+imageName[imageName.length - 1];
 

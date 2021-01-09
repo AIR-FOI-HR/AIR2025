@@ -4,7 +4,6 @@ package hr.foi.air.visualbrickfinder.recyclerviews;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
 import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +49,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-       // return brickList == null ? 1 : 0;
         int type;
         if(brickList != null) type = 0;
         else if (roofTileList != null) type = 1;
@@ -109,7 +107,17 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 roofTileViewHolder.brandTxt.setText(currentRoofTile.getBrand());
                 roofTileViewHolder.descTxt.setText(currentRoofTile.getDescription());
                 roofTileViewHolder.dimensionsTxt.setText(currentRoofTile.getDimensions());
-                Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).into(roofTileViewHolder.imageViewRoofTile);
+                File fileTile = new File(currentRoofTile.getLocalImageUrl());
+                Picasso.get().load(fileTile).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile);
+                    }
+                });
                 setExpandCollapseAnimation(roofTileViewHolder.detailsBtn, roofTileViewHolder.expandableLayout);
                 /*
                 roofTileViewHolder.webBtn.setOnClickListener(v -> {
@@ -133,7 +141,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        //return brickList == null ? roofTileList.size() : brickList.size();
         int count;
         if(brickList != null) count=brickList.size();
         else if (roofTileList != null) count=roofTileList.size();
@@ -144,7 +151,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setExpandCollapseAnimation(MaterialButton btn, MaterialCardView expandableLayout) {
         btn.setOnClickListener(v -> {
-
             if (expandableLayout.getVisibility() == View.GONE) {
                 expandableLayout.setVisibility(View.VISIBLE);
                 btn.setText("Collapse");
