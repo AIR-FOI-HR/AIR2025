@@ -27,10 +27,10 @@ public class BrickViewHolder extends RecyclerView.ViewHolder {
     MaterialCardView expandableLayout;
     @BindView(R.id.btn_brick_details)
     MaterialButton detailsBtn;
-    /*
-    @BindView(R.id.btn_brick_web)
-    MaterialButton webBtn;
-     */
+
+    @BindView(R.id.btn_brick_favorite)
+    MaterialButton favoriteBtn;
+
     @BindView(R.id.img_brick)
     ImageView imageViewBrick;
 

@@ -49,10 +49,10 @@
         android:label="fragment_history_products"
         tools:layout="@layout/fragment_history_products" />
     <fragment
-        android:id="@+id/main_menu_item_favorites"
+        android:id="@+id/favoritesFragment"
         android:name="hr.foi.air.visualbrickfinder.FavoritesFragment"
-        android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" />
 
     <!--Fragment id must be same as menu item id for them to be connected-->
 </navigation>

@@ -32,6 +32,9 @@ public class RoofTileViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.btn_roof_tile_web)
     MaterialButton webBtn;
      */
+    @BindView(R.id.btn_rooftile_favorite)
+    MaterialButton favoriteBtn;
+
     @BindView(R.id.img_roof_tile)
     ImageView imageViewRoofTile;
 

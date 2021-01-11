@@ -20,8 +20,12 @@ import java.io.File;
 import java.util.List;
 
 import hr.foi.air.database.entities.Picture;
+import hr.foi.air.visualbrickfinder.FavoritesFragment;
 import hr.foi.air.visualbrickfinder.HistoryFragment;
+import hr.foi.air.visualbrickfinder.HistoryProductsFragment;
 import hr.foi.air.visualbrickfinder.R;
+import hr.foi.air.visualbrickfinder.SimilarProductsFragment;
+import hr.foi.air.visualbrickfinder.database.ProductHistoryStorage;
 import hr.foi.air.webservicefrontend.products.Brick;
 import hr.foi.air.webservicefrontend.products.RoofTile;
 
@@ -32,19 +36,37 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<Picture> pictureList;
     private ViewGroup viewGroup;
     private int saveHeight;
-    private HistoryFragment caller;
+    private HistoryFragment historyCaller = null;
+    private FavoritesFragment favoritesCaller = null;
+    private HistoryProductsFragment historyProductsFragmentCaller = null;
+    private SimilarProductsFragment similarProductsFragmentCaller = null;
 
-    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList) {
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, SimilarProductsFragment similarProductsFragmentCaller) {
         this.brickList = brickList;
         this.roofTileList = roofTileList;
         this.pictureList= pictureList;
+        this.similarProductsFragmentCaller = similarProductsFragmentCaller;
     }
 
-    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, HistoryFragment caller) {
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, HistoryFragment historyCaller) {
         this.brickList = brickList;
         this.roofTileList = roofTileList;
         this.pictureList= pictureList;
-        this.caller=caller;
+        this.historyCaller = historyCaller;
+    }
+
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, FavoritesFragment historyCaller) {
+        this.brickList = brickList;
+        this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
+        this.favoritesCaller = historyCaller;
+    }
+
+    public SimilarItemsAdapter(List<Brick> brickList, List<RoofTile> roofTileList, List<Picture> pictureList, HistoryProductsFragment historyProductsFragmentCaller) {
+        this.brickList = brickList;
+        this.roofTileList = roofTileList;
+        this.pictureList= pictureList;
+        this.historyProductsFragmentCaller = historyProductsFragmentCaller;
     }
 
     @Override
@@ -80,6 +102,11 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 brickViewHolder.nameTxt.setText(currentBrick.getName());
                 brickViewHolder.brandTxt.setText(currentBrick.getBrand());
                 brickViewHolder.descTxt.setText(currentBrick.getDescription());
+                if(currentBrick.getFlagFavorite() == 0) {
+                    brickViewHolder.favoriteBtn.setIconTintResource(R.color.greyButtonColor);
+                } else {
+                    brickViewHolder.favoriteBtn.setIconTintResource(R.color.cherryWienerberger);
+                }
                 File file = new File(currentBrick.getLocalImageUrl());
                 Picasso.get().load(file).resize(400, 400).centerCrop().into(brickViewHolder.imageViewBrick, new Callback() {
                     @Override
@@ -92,6 +119,10 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     }
                 });
                 setExpandCollapseAnimation(brickViewHolder.detailsBtn, brickViewHolder.expandableLayout);
+                String itemName = brickViewHolder.nameTxt.getText().toString();
+                setFavoritesButton(brickViewHolder.favoriteBtn, itemName);
+
+
                 /*
                 brickViewHolder.webBtn.setOnClickListener(v -> {
                     //TODO: set valid links
@@ -107,6 +138,12 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 roofTileViewHolder.brandTxt.setText(currentRoofTile.getBrand());
                 roofTileViewHolder.descTxt.setText(currentRoofTile.getDescription());
                 roofTileViewHolder.dimensionsTxt.setText(currentRoofTile.getDimensions());
+                if(currentRoofTile.getFlagFavorite() == 0) {
+                    roofTileViewHolder.favoriteBtn.setIconTintResource(R.color.greyButtonColor);
+                } else {
+                    roofTileViewHolder.favoriteBtn.setIconTintResource(R.color.cherryWienerberger);
+                }
+
                 File fileTile = new File(currentRoofTile.getLocalImageUrl());
                 Picasso.get().load(fileTile).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile, new Callback() {
                     @Override
@@ -118,7 +155,10 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile);
                     }
                 });
+
                 setExpandCollapseAnimation(roofTileViewHolder.detailsBtn, roofTileViewHolder.expandableLayout);
+                String rooftileName = roofTileViewHolder.nameTxt.getText().toString();
+                setFavoritesButton(roofTileViewHolder.favoriteBtn, rooftileName);
                 /*
                 roofTileViewHolder.webBtn.setOnClickListener(v -> {
                     //TODO: set valid links
@@ -133,9 +173,46 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 pictureViewHolder.dateTxt.setText(String.valueOf(currentPicture.getPictureDate()));
                 Picasso.get().load(currentPicture.getImageUri()).into(pictureViewHolder.imageView);
                 pictureViewHolder.id=currentPicture.getId();
-                pictureViewHolder.historyFragment=caller;
+                pictureViewHolder.historyFragment= historyCaller;
                 break;
         }
+    }
+
+    private void setFavoritesButton(MaterialButton button, String itemName) {
+
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                ProductHistoryStorage productHistoryStorage = new ProductHistoryStorage();
+                if(button.getIconTint().getDefaultColor() == -5046272 ){
+                    button.setIconTintResource(R.color.greyButtonColor);
+                    if(favoritesCaller != null) {
+                        productHistoryStorage.setProductAsNOFavorite(favoritesCaller, itemName);
+                    } else {
+                        if (historyProductsFragmentCaller != null){
+                            productHistoryStorage.setProductAsNOFavorite(historyProductsFragmentCaller, itemName);
+                        } else {
+                            if(similarProductsFragmentCaller != null)
+                                productHistoryStorage.setProductAsNOFavorite(similarProductsFragmentCaller, itemName);
+                        }
+                    }
+                } else
+                    if(button.getIconTint().getDefaultColor() == -2697257){
+                        button.setIconTintResource(R.color.cherryWienerberger);
+                        if(favoritesCaller != null) {
+                            productHistoryStorage.setProductAsFavorite(favoritesCaller, itemName);
+                        } else {
+                            if(historyProductsFragmentCaller != null){
+                                productHistoryStorage.setProductAsFavorite(historyProductsFragmentCaller, itemName);
+                            } else {
+                                if(similarProductsFragmentCaller != null){
+                                    productHistoryStorage.setProductAsFavorite(similarProductsFragmentCaller, itemName);
+                                }
+                            }
+                        }
+                    }
+            }
+        });
     }
 
 

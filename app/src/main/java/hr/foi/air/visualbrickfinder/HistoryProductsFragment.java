@@ -47,9 +47,9 @@ public class HistoryProductsFragment extends Fragment {
 
 
     public void receiveProductsBricks(List<Brick> bricks) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null, null));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null, null, this));
     }
     public void receiveProductsRoofTiles(List<RoofTile> roofTiles) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles, null));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles, null, this));
     }
 }

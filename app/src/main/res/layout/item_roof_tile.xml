@@ -50,6 +50,18 @@
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/round_layout"
                 android:backgroundTint="@color/colorTransparent">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_rooftile_favorite"
+                    android:layout_width="44dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingTop="10dp"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    app:icon="@drawable/ic_favorites"
+                    app:iconTint="@color/greyButtonColor" />
                 <!-- second button if needed
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_roof_tile_web"

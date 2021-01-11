@@ -33,8 +33,18 @@ public interface DAO {
     @Query("SELECT * FROM pictures ORDER BY pictureDate DESC")
     public List<Picture> loadAllPictures();
 
+    @Query("SELECT * FROM products")
+    public List<Product> loadAllProducts();
+
+    @Query("SELECT * FROM products WHERE flagFavorite == 1")
+    public List<Product> loadAllFavoritesProducts();
+
     @Query("SELECT * FROM products JOIN results ON products.id = results.idProduct WHERE results.idPicture = :pictureId")
     public List<Product> loadRelevantProducts(int pictureId);
 
+    @Query("UPDATE products SET flagFavorite = 1 WHERE productName = :name")
+    public void setProductAsFavorite(String name);
 
+    @Query("UPDATE products SET flagFavorite = 0 WHERE productName = :name")
+    public void setProductAsNOFavorite(String name);
 }

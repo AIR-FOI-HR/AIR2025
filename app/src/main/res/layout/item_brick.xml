@@ -52,20 +52,19 @@
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/round_layout"
                 android:backgroundTint="@color/colorTransparent">
-                <!-- second button if needed
+                <!-- second button if needed -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_brick_web"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:backgroundTint="@color/greyButtonColor"
+                    android:id="@+id/btn_brick_favorite"
+                    android:layout_width="44dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:fontFamily="@font/roboto_medium"
                     android:paddingTop="10dp"
-                    android:text="@string/item_brick_website_txt"
-                    android:textAlignment="center"
+                    android:textAlignment="textStart"
                     android:textAllCaps="false"
-                    android:layout_alignParentEnd="true"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button" />
-                -->
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    app:icon="@drawable/ic_favorites"
+                    app:iconTint="@color/greyButtonColor" />
 
 
                 <com.google.android.material.button.MaterialButton

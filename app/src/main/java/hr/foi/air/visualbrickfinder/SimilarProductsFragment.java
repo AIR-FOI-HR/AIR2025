@@ -78,14 +78,14 @@ public class SimilarProductsFragment extends Fragment {
     }
 
     public void receiveBricks(List<Brick> bricks) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null,null));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(bricks, null,null, this));
         switchLoaderAndListLayout();
     }
 
     
 
     public void receiveRoofTiles(List<RoofTile> roofTiles) {
-        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles,null));
+        recyclerViewProducts.setAdapter(new SimilarItemsAdapter(null, roofTiles,null, this));
         switchLoaderAndListLayout();
     }
 
