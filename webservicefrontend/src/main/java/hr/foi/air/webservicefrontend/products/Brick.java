@@ -19,14 +19,16 @@ public class Brick {
     @SerializedName(value="primaId")
     private int id;
     private String localUrl = "";
+    private int flagFavorite = 0;
 
 
-    public Brick(String name, String brand, String description, String image,Integer id) {
+    public Brick(String name, String brand, String description, String image,Integer id, Integer flagFavorite) {
         this.name = name;
         this.brand = brand;
         this.description = description;
         this.websiteImageUrl = image;
         this.id = id;
+        this.flagFavorite = flagFavorite;
     }
 
     @Override
@@ -78,7 +80,16 @@ public class Brick {
     public String getLocalImageUrl() { return localUrl; }
 
     public void setLocalImageUrl(String image) { this.localUrl = image; }
-/*
+
+    public int getFlagFavorite() {
+        return flagFavorite;
+    }
+
+    public void setFlagFavorite(int flagFavorite) {
+        this.flagFavorite = flagFavorite;
+    }
+
+    /*
     public String getUrl() {
         return url;
     }

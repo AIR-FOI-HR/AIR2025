@@ -7,8 +7,8 @@ public class RoofTile extends Brick {
     @SerializedName(value="dimensions")
     private String dimensions;
 
-    public RoofTile(String name, String brand, String description, String image, String dimensions, Integer id) {
-        super(name, brand, description, image, id);
+    public RoofTile(String name, String brand, String description, String image, String dimensions, Integer id, Integer flagFavorite) {
+        super(name, brand, description, image, id, flagFavorite);
         this.dimensions = dimensions;
     }
 
