@@ -1,11 +1,6 @@
 package hr.foi.air.visualbrickfinder.database;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import hr.foi.air.database.DAO;
@@ -30,16 +25,13 @@ public class ProductHistoryStorage {
     public void getPictures(HistoryFragment caller) {
         this.pictureCaller=caller;
         dao = MyDatabase.getInstance(pictureCaller.getContext()).getDAO();
-        returnPictures(dao.loadAllPictures()); //Implement when database is finished, returns all photographs
-        //setMockPictureData();
+        returnPictures(dao.loadAllPictures());
     }
 
     public void getProductsForId(HistoryProductsFragment caller, int id) {
         this.productCaller=caller;
         dao = MyDatabase.getInstance(productCaller.getContext()).getDAO();
         returnProducts(dao.loadRelevantProducts(id));
-        //loadData(id); //Implement when database is finished, returns all photographs
-        //setMockProductData(id);
     }
 
     public void getAllFavoritesProducts(FavoritesFragment caller) {
@@ -241,6 +233,7 @@ public class ProductHistoryStorage {
                     roofTiles.add(newRoofTile);
                 }
                 productFavoritesCaller.receiveProductsRoofTiles(roofTiles);
+
             }
         }
 

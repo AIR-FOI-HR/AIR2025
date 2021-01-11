@@ -71,7 +71,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-       // return brickList == null ? 1 : 0;
         int type;
         if(brickList != null) type = 0;
         else if (roofTileList != null) type = 1;
@@ -145,7 +144,18 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     roofTileViewHolder.favoriteBtn.setIconTintResource(R.color.cherryWienerberger);
                 }
 
-                Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).into(roofTileViewHolder.imageViewRoofTile);
+                File fileTile = new File(currentRoofTile.getLocalImageUrl());
+                Picasso.get().load(fileTile).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Picasso.get().load(currentRoofTile.getWebsiteImageUrl()).resize(400, 400).centerCrop().into(roofTileViewHolder.imageViewRoofTile);
+                    }
+                });
+
                 setExpandCollapseAnimation(roofTileViewHolder.detailsBtn, roofTileViewHolder.expandableLayout);
                 String rooftileName = roofTileViewHolder.nameTxt.getText().toString();
                 setFavoritesButton(roofTileViewHolder.favoriteBtn, rooftileName);
@@ -208,7 +218,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        //return brickList == null ? roofTileList.size() : brickList.size();
         int count;
         if(brickList != null) count=brickList.size();
         else if (roofTileList != null) count=roofTileList.size();
@@ -219,7 +228,6 @@ public class SimilarItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void setExpandCollapseAnimation(MaterialButton btn, MaterialCardView expandableLayout) {
         btn.setOnClickListener(v -> {
-
             if (expandableLayout.getVisibility() == View.GONE) {
                 expandableLayout.setVisibility(View.VISIBLE);
                 btn.setText("Collapse");

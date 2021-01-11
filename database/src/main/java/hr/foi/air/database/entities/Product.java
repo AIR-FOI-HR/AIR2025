@@ -12,16 +12,14 @@ public class Product {
     int id;
     @NotNull
     String productName = "pocetnoIme";
-
-
-
     String brand;
     String dimensions;
     String description;
     @NotNull
     int flagFavorite = 22;
     @NotNull
-    String productImage = "pocetnoImeSlike";
+    String productImage = "None";
+    String productWebsiteImage ="None";
 
 
     public int getId() {
@@ -74,6 +72,11 @@ public class Product {
     public void setProductImage(@NotNull String productImage) {
         this.productImage = productImage;
     }
+
+    public String getProductWebsiteImage() { return productWebsiteImage; }
+
+    public void setProductWebsiteImage(String productWebsiteImage) { this.productWebsiteImage = productWebsiteImage; }
+
     public String getBrand() {
         return brand;
     }
