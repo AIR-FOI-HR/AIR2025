@@ -174,6 +174,7 @@ public class ProductHistoryStorage {
                             product.getId(),
                             product.getFlagFavorite());
                     newBrick.setLocalImageUrl(product.getProductImage());
+                    newBrick.setWebsiteImageUrl(product.getProductWebsiteImage());
                     bricks.add(newBrick);
                 }
 
@@ -190,6 +191,7 @@ public class ProductHistoryStorage {
                             product.getId(),
                             product.getFlagFavorite());
                     newRoofTile.setLocalImageUrl(product.getProductImage());
+                    newRoofTile.setWebsiteImageUrl(product.getProductWebsiteImage());
                     roofTiles.add(newRoofTile);
                 }
                 productCaller.receiveProductsRoofTiles(roofTiles);
@@ -213,6 +215,7 @@ public class ProductHistoryStorage {
                             product.getId(),
                             product.getFlagFavorite());
                     newBrick.setLocalImageUrl(product.getProductImage());
+                    newBrick.setWebsiteImageUrl(product.getProductWebsiteImage());
                     bricks.add(newBrick);
                 }
 
@@ -230,6 +233,7 @@ public class ProductHistoryStorage {
                             product.getId(),
                             product.getFlagFavorite());
                     newRoofTile.setLocalImageUrl(product.getProductImage());
+                    newRoofTile.setWebsiteImageUrl(product.getProductWebsiteImage());
                     roofTiles.add(newRoofTile);
                 }
                 productFavoritesCaller.receiveProductsRoofTiles(roofTiles);
