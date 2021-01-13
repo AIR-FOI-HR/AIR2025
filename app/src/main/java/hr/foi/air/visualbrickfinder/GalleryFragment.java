@@ -10,8 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -21,9 +19,14 @@ import android.view.ViewGroup;
 
 import java.io.File;
 
+import hr.foi.air.visualbrickfinder.picture.GalleryPictureProvider;
+import hr.foi.air.visualbrickfinder.picture.PictureProvider;
+import hr.foi.air.visualbrickfinder.picture.PictureRequester;
 
-public class GalleryFragment extends Fragment {
 
+public class GalleryFragment extends Fragment implements PictureRequester {
+
+    private PictureProvider pictureProvider;
 
     public GalleryFragment() {
         // Required empty public constructor
@@ -41,7 +44,9 @@ public class GalleryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
-        startActivityForResult(getGalleryIntent(), PICK_IMAGE);
+        pictureProvider = new GalleryPictureProvider();
+        pictureProvider.getPicture(this, PICK_IMAGE);
+        //startActivityForResult(getGalleryIntent(), PICK_IMAGE);
         return v;
     }
 
@@ -75,4 +80,8 @@ public class GalleryFragment extends Fragment {
         return Uri.parse(Uri.fromFile(file).toString());
     }
 
+    @Override
+    public void onRequestCompleted(Uri pictureUri) {
+        //empty for now
+    }
 }

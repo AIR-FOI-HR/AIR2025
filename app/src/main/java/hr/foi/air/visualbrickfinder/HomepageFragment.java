@@ -17,6 +17,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,11 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import hr.foi.air.visualbrickfinder.picture.CameraPictureProvider;
+import hr.foi.air.visualbrickfinder.picture.PictureProvider;
+import hr.foi.air.visualbrickfinder.picture.PictureRequester;
 
-public class HomepageFragment extends Fragment {
+public class HomepageFragment extends Fragment implements PictureRequester {
 
     @BindView(R.id.activity_main_rellay_pulse)
     RelativeLayout pulse;
@@ -45,7 +49,9 @@ public class HomepageFragment extends Fragment {
     @BindView(R.id.activity_main_txt_tap)
     TextView txtTap;
 
-    Uri imageUri;
+    private Uri imageUri;
+
+    private PictureProvider pictureProvider;
 
     public HomepageFragment() {
         // Required empty public constructor
@@ -68,6 +74,7 @@ public class HomepageFragment extends Fragment {
          * */
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+        pictureProvider = new CameraPictureProvider();
         return v;
 
     }
@@ -127,11 +134,7 @@ public class HomepageFragment extends Fragment {
      */
 
 
-    public static Intent getStartIntent(Uri imageUri) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        return intent;
-    }
+
 
     private void setCameraAnimation() {
         if (((MainActivity) getActivity()).requestCameraAndStoragePermission()) {
@@ -149,11 +152,7 @@ public class HomepageFragment extends Fragment {
                  */
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    File imageFile = createImageFile();
-                    if (imageFile != null) {
-                        imageUri = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName(), imageFile);
-                        startActivityForResult(getStartIntent(imageUri), 100);
-                    }
+                    pictureProvider.getPicture(HomepageFragment.this, 100);
                 }
 
                 @Override
@@ -168,18 +167,8 @@ public class HomepageFragment extends Fragment {
     }
 
 
-    private String setImageName() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH);
-        String timestamp = sdf.format(new Date());
-        return "VisualBrickFinderImage" + timestamp + ".jpg";
+    @Override
+    public void onRequestCompleted(Uri pictureUri) {
+        imageUri = pictureUri;
     }
-
-
-
-    private File createImageFile() {
-        File directory = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        String imageName = setImageName();
-        return new File(directory, imageName);
-    }
-
 }

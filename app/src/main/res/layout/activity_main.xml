@@ -23,6 +23,7 @@
         app:itemIconTint="@color/almostWhiteWienerberger"
         app:itemRippleColor="@color/almostWhiteWienerberger"
         app:itemTextColor="@color/almostWhiteWienerberger"
-        app:menu="@menu/main_menu"/>
+        app:menu="@menu/main_menu"
+        app:labelVisibilityMode="labeled"/>
 
 </RelativeLayout>
