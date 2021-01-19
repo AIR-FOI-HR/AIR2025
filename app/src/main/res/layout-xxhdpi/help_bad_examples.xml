@@ -5,12 +5,23 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_horizontal"
+        android:paddingVertical="15dp"
+        android:text="Visual Brick Help"
+        android:textColor="@color/cherryWienerberger"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         app:cardCornerRadius="25dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"

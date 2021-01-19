@@ -1,0 +1,11 @@
+
+R
+java:S2589"7Remove this expression which always evaluates to "true"(çÖê–ûÿÿÿÿ
+J
+java:S1128"4Remove this unused import 'android.content.Context'.(©Ê‰è
+e
+java:S1128"JRemove this unused import 'hr.foi.air.visualbrickfinder.HomepageFragment'.(‰İ‹ûÿÿÿÿ
+r
+java:S1450"WRemove the "imageUri" field and declare it as a local variable in the relevant methods.(Ø°´şÿÿÿÿ
+^
+java:S1128"CRemove this unused import 'androidx.fragment.app.FragmentActivity'.(Êñô–úÿÿÿÿ

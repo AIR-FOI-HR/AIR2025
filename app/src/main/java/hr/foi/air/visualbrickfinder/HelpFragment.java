@@ -30,7 +30,7 @@ public class HelpFragment extends Fragment {
     ViewPager mViewPager;
     @BindView(R.id.help_dots)
     LinearLayout mLinearOfDots;
-    private int[] helpCardLayouts = {R.layout.help_take_a_photo, R.layout.help_select_from_gallery, R.layout.help_good_examples, R.layout.help_bad_examples};
+    private int[] helpCardLayouts = {R.layout.help_take_a_photo, R.layout.help_select_from_gallery, R.layout.help_good_examples, R.layout.help_bad_examples,R.layout.help_history,R.layout.help_favorites};
     private HelpFeaturePageAdapter mHelpFeaturePageAdapter;
     private ImageView[] mDots;
     public HelpFragment() {
@@ -42,7 +42,7 @@ public class HelpFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_help, container, false);
         ButterKnife.bind(this, v);
-        mViewPager.setPadding(0, 80, 0, 80);
+        mViewPager.setPadding(0, 0, 0, 80);
         mHelpFeaturePageAdapter = new HelpFeaturePageAdapter(helpCardLayouts, getActivity());
 
         mViewPager.setAdapter(mHelpFeaturePageAdapter);

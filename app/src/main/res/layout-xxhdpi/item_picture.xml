@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="30dp"
+    android:background="@drawable/round_layout"
+    android:backgroundTint="@color/colorTransparent"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/round_layout"
+            android:backgroundTint="@color/colorTransparent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_search_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_layout"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="8dp"
+                android:text="@string/search_date"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/id"
+                android:layout_width="2dp"
+                android:layout_height="2dp"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/img_photo"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/item_brick_brick_image_description"
+                android:maxWidth="200dp"
+                android:scaleType="centerCrop" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+
+P	java:S125"<This block of commented-out lines of code should be removed.(¤ı
+V	java:S125"<This block of commented-out lines of code should be removed.(€ š—øÿÿÿÿ
+V	java:S125""<This block of commented-out lines of code should be removed.(º¡Ö²ÿÿÿÿÿ
+>
+java:S1185)"(Remove this method to simply inherit it.(ßìê¯
+Q	java:S1253"<This block of commented-out lines of code should be removed.(ï¸Âç
+V	java:S1257"<This block of commented-out lines of code should be removed.(üğıèøÿÿÿÿ
+V
+java:S1854A"@Remove this useless assignment to local variable "mainActivity".(Ä İ²
+G
+java:S1481A"1Remove this unused "mainActivity" local variable.(Ä İ²
+H
+java:S1144O"-Remove this unused private "mockData" method.(âÚ“¾ùÿÿÿÿ

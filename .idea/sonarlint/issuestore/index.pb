@@ -21,3 +21,15 @@ s
 Capp/src/main/java/hr/foi/air/visualbrickfinder/GalleryFragment.java,6\f\6ff1d7c23be3f7aea559c0f305075324ccbe160a
 p
 @app/src/main/java/hr/foi/air/visualbrickfinder/HelpFragment.java,a\3\a3ec692a42821923ee702f0031d837a812aa4bf5
+u
+Eapp/src/main/java/hr/foi/air/visualbrickfinder/FavoritesFragment.java,a\2\a2a962528e0a69918c190f1a581bec385d90feeb
+{
+Kapp/src/main/java/hr/foi/air/visualbrickfinder/HistoryProductsFragment.java,4\3\43a809443fb640b820aeb83f59d21e6b77ab3a70
+Ç
+Rapp/src/main/java/hr/foi/air/visualbrickfinder/picture/GalleryPictureProvider.java,2\6\26865f7f7c09e6a9cb686d8aae2d5fbd60a2e917
+Å
+Qapp/src/main/java/hr/foi/air/visualbrickfinder/picture/CameraPictureProvider.java,2\1\218d29be1c4a3c18345bb1043d7688ac69c59746
+{
+Kapp/src/main/java/hr/foi/air/visualbrickfinder/picture/PictureProvider.java,4\1\41fce5698b473d907289bc367f11ccf68653e871
+|
+Lapp/src/main/java/hr/foi/air/visualbrickfinder/picture/PictureRequester.java,7\7\774ab728753f577e7b5f2e798788e8e0c364443a
