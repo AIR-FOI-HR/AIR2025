@@ -5,16 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center_vertical"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:paddingVertical="15dp"
-        android:text="Visual Brick Help"
-        android:textColor="@color/cherryWienerberger"
-        android:textSize="22sp"
-        android:textStyle="bold" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -102,9 +92,7 @@
                 android:padding="12dp"
                 android:text="To get the best results, please follow instructions:\n\n1. Crop picture so it shows only either brick\n     or roof tile.\n2. Picture of bricks must be oriented\n    straight.\n3. Pictures of bricks taken from angle will\n    affect the results negatively.\n4. Pictures of roof tiles can be taken from\n    angle."
                 android:textColor="@color/black"
-                android:textSize="14dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginTop="15dp"/>
+                android:textSize="14dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
