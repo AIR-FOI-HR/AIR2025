@@ -16,7 +16,7 @@ import hr.foi.air.visualbrickfinder.R;
 
 public class RoofTileViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.txt_brick_brand)
+    @BindView(R.id.txt_roof_tile_brand)
     TextView brandTxt;
     @BindView(R.id.txt_roof_tile_desc)
     TextView descTxt;
