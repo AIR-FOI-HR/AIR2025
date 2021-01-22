@@ -5,14 +5,20 @@ import json
 import re
 import ast
 import sys, getopt
+import os
 from urllib.request import urlopen
 from colormath.color_objects import sRGBColor, LabColor
 from colormath.color_conversions import convert_color
 from colormath.color_diff import delta_e_cie2000
+from imageai.Classification import ImageClassification
 
-def getImage(imageUrl):
-    urllib.request.urlretrieve(imageUrl, "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\nova.jpg")
-    return "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\nova.jpg"
+def classify_image(image):
+    prediction = ImageClassification()
+    prediction.setModelTypeAsDenseNet121()
+    prediction.setModelPath("C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\DenseNet-BC-121-32.h5")
+    prediction.loadModel()
+    predictions, probabilities = prediction.classifyImage(image, result_count=1)
+    return predictions[0]
 
 def get_average_color(image):
     myimg = cv2.imread(image)
@@ -40,25 +46,19 @@ def compare_colors(rgb1, rgb2):
 
     return delta_e
 
-def main(baseImg, testImagesUrls):
-    imgPath = baseImg
-    image = "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\userImage.jpg"
-    base_img_average = get_average_color_base(image)
+image = "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\userImage.jpg"
 
-    max_difference = 15
-
-    for num in range(0, len(testImagesUrls)-1):
-        imgPath = testImagesUrls[num]
-        img_saved = getImage(imgPath)
-        average_color = get_average_color(img_saved)
-      
-        result = compare_colors(base_img_average, average_color)
-        if result < max_difference:
-            print (testImagesUrls[num])
-
-
-
-baseImg = sys.argv[1]
-testImagesUrls = sys.argv[2]
-
-main(baseImg, testImagesUrls.split(','))
+base_img_average = get_average_color_base(image)
+product_type = 'roof' if classify_image(image) == 'tile_roof' else 'facade';
+product_extension = '/product-texture' if product_type == 'facade' else '/single-product'
+country = 'germany' if product_type == 'facade' else 'croatia'
+api_path = "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/" + country + "/marketing/photography/productshots/" + product_type + product_extension
+images_path = "C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\" + product_type;
+max_difference = 15
+for image_path in os.listdir(images_path):
+    input_path = os.path.join(images_path, image_path)
+    average_color = get_average_color(input_path)
+    
+    result = compare_colors(base_img_average, average_color)
+    if result < max_difference:
+        print (api_path + '/' + image_path)

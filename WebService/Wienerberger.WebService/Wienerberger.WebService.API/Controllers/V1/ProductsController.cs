@@ -59,31 +59,31 @@ namespace Wienerberger.WebService.API.Controllers.V1
         {
             _logger.LogDebug($"ProductsControllers::POST::{getProductsRequest.Base64String}");
 
-            if (String.IsNullOrEmpty(getProductsRequest.Base64String))
-            {
-                return BadRequest(getProductsRequest);
-            }
+            //if (String.IsNullOrEmpty(getProductsRequest.Base64String))
+            //{
+            //    return BadRequest(getProductsRequest);
+            //}
 
             Image convertedImage = null;
             var successfullConversion = _imageService.TryConvertFromBase64(getProductsRequest.Base64String, ref convertedImage);
 
-            if (!successfullConversion)
-            {
-                return UnprocessableEntity(getProductsRequest);
-            }
+            //if (!successfullConversion)
+            //{
+            //    return UnprocessableEntity(getProductsRequest);
+            //}
 
             var fascades = await _fascadeService.GetAll();
             string fascadesUrls = "";
-            foreach(var f in fascades)
+            foreach (var f in fascades)
             {
                 fascadesUrls += f.Assets.ToString() + ",";
             }
-
-            convertedImage.Save(@"C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\userImage.jpg", ImageFormat.Png);
+            string recievedImageUrl = @"C:\\AIRprojekt\\AIR2025\\WebService\\ImageComparisonPythonService\\fascades\\userImage.jpg";
+            //convertedImage.Save(recievedImageUrl, ImageFormat.Png);
 
             ProcessStartInfo start = new ProcessStartInfo();
             start.FileName = @"C:\Users\Stipe\AppData\Local\Programs\Python\Python37\python.exe";//cmd is full path to python.exe
-            start.Arguments = @$"C:\AIRprojekt\AIR2025\WebService\ImageComparisonPythonService\compareImages.py {fascades[5].Assets} {fascadesUrls}";//args is path to .py file and any cmd line args
+            start.Arguments = @$"C:\AIRprojekt\AIR2025\WebService\ImageComparisonPythonService\compareImages.py {recievedImageUrl}";//args is path to .py file and any cmd line args
             start.UseShellExecute = false;
             start.RedirectStandardOutput = true;
             string result = "";
@@ -92,10 +92,10 @@ namespace Wienerberger.WebService.API.Controllers.V1
                 using (StreamReader reader = process.StandardOutput)
                 {
                     result = reader.ReadToEnd();
-                    Console.Write(result);
                 }
             }
-            var results = fascades.Where(f => f.Assets+"\r\n" == result);
+            var resultsPaths = result.Split("\r\n");
+            var results = fascades.Where(f => Array.Exists(resultsPaths, element => element == f.Assets));
 
             return Ok(results);
         }
