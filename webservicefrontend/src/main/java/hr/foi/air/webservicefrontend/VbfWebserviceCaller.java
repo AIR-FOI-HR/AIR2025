@@ -90,9 +90,9 @@ public class VbfWebserviceCaller {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                setMockBrickData();
+                //setMockBrickData();
                 //setMockRoofTileData();
-                //handleFailure("failure");
+                handleFailure("failure");
             }
         });
     }
