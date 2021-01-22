@@ -90,37 +90,38 @@ public class VbfWebserviceCaller {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                //setMockBrickData();
+                setMockBrickData();
                 //setMockRoofTileData();
-                handleFailure("failure");
+                //handleFailure("failure");
             }
         });
     }
 
-   /* private void setMockBrickData() {
+    private void setMockBrickData() {
         List<Brick> bricks = new ArrayList<>();
         bricks.add(new Brick(
                 "Ambiente Vulkangrau siva - rustikalna sa šupljinama",
                 "Terca",
                 "Terca klinker fasadna opeka pruža zaštitni sloj od vremenskih utjecaja i nudi iznimnu kreativnu slobodu pri oblikovanju fasade. Budući da je svaka opeka indi\u00ADvidualna stvara bezvremenski lijepe objekte s nezamjenjivim karakterom i čarom.",
-                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Ambiente_Vulkangrau.jpg"));
+                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Ambiente_Vulkangrau.jpg",
+                2333,0));
         bricks.add(new Brick(
                 "Calau smede crvena -  modrno sivi podton - glatka sa supljinama",
                 "Terca",
                 "Terca klinker fasadna opeka pruža zaštitni sloj od vremenskih utjecaja i nudi iznimnu kreativnu slobodu pri oblikovanju fasade. Budući da je svaka opeka indi\u00ADvidualna stvara bezvremenski lijepe objekte s nezamjenjivim karakterom i čarom.",
-                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Calau.jpg"));
+                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Calau.jpg",2393,0));
 
         bricks.add(new Brick(
                 "Rugen sareno zuta - glatka puna",
                 "Terca",
                 "Terca klinker fasadna opeka pruža zaštitni sloj od vremenskih utjecaja i nudi iznimnu kreativnu slobodu pri oblikovanju fasade. Budući da je svaka opeka indi\u00ADvidualna stvara bezvremenski lijepe objekte s nezamjenjivim karakterom i čarom.",
-                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Ruegen.jpg"));
+                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Ruegen.jpg",2363,0));
 
         bricks.add(new Brick(
                 "Heide crveno nijansirana - glatka puna",
                 "Terca",
                 "Terca klinker fasadna opeka pruža zaštitni sloj od vremenskih utjecaja i nudi iznimnu kreativnu slobodu pri oblikovanju fasade. Budući da je svaka opeka indi\u00ADvidualna stvara bezvremenski lijepe objekte s nezamjenjivim karakterom i čarom.",
-                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Heide.jpg"));
+                "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/germany/marketing/photography/productshots/facade/product-texture/DE_MKT_PSH_TER_Heide.jpg",2533,0));
 
         vbfWebserviceHandler.onDataArrived(
                 bricks,
@@ -130,7 +131,7 @@ public class VbfWebserviceCaller {
         );
 
     }
-
+/*
     private void setMockRoofTileData() {
         List<RoofTile> roofTiles = new ArrayList<>();
         roofTiles.add(new RoofTile(
@@ -138,14 +139,16 @@ public class VbfWebserviceCaller {
                 "Tondach",
                 "Saturn je crijep velikog formata iz moderne linije crijepa koji zadovoljava najnovije zahtjeve suvremene arhitekture. Jednostavnim oblikom savršeno se uklapa u moderne, pravokutne strukture. Njegova reducirana površina omogućuje Vam stvaranje pravocrtnih linija na krovu. Postavlja se brzo i jednostavno te ima mogućnost kliznog letvanja. Kvalitetan i vizualno lijep crijep krovu daje individualnost i estetiku. Tondach Saturn raspoloživ je u nekoliko engobiranih i glaziranih varijanti. Oplemenjena gornja površina pridonosi postojanosti boja te dugotrajnoj kvaliteti krova prema Vašim željama.",
                 "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/croatia/marketing/photography/productshots/roof/single-product/HR_MKT_PHO_PSH_ROF_TON_Saturn_Natur_Color_Crvena_web_01.jpg",
-                "48,5x29"));
+                "48,5x29",
+                123,
+                0));
 
         roofTiles.add(new RoofTile(
                 "Figaro Natur Color bakrenosmeđa",
                 "Tondach",
                 "Figaro je moderan crijep, koji daje odgovor suvremenim zahtjevima arhitekture. Svojom jednostavnošću podržava pravokutne strukture krovova. Kreativnost ne poznaje granice. S različitim oblicima i bojama, mogu se stvoriti zanimljivi efekti. S lakoćom su izvodivi nekonvencionalni oblici krovova.",
                 "https://foiwbstorage.blob.core.windows.net/foi-wb/wb-products/wb-products/content/dam/wienerberger/croatia/marketing/photography/productshots/roof/single-product/HR_MKT_PHO_PSH_ROF_TON_Figaro_Natur_Color_Bakreno_Smeda_web_01.jpg",
-                "45,2x26,5"));
+                "45,2x26,5",124,0));
 
 
         vbfWebserviceHandler.onDataArrived(

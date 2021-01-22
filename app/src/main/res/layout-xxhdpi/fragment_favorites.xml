@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:paddingVertical="15dp"
-        android:gravity="center_horizontal"
+        android:paddingLeft="30dp"
         android:text="@string/favorite_products"
         android:textColor="@color/cherryWienerberger"
         android:textSize="22sp"

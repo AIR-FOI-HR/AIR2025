@@ -38,10 +38,12 @@
             <ImageView
                 android:id="@+id/img_roof_tile"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/item_brick_brick_image_description"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 android:maxWidth="200dp" />
 
             <RelativeLayout

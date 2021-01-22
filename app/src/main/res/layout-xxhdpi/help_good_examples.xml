@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:gravity="center_horizontal"
+        android:paddingLeft="30dp"
         android:paddingVertical="15dp"
         android:text="Visual Brick Help"
         android:textColor="@color/cherryWienerberger"
@@ -38,7 +38,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/white"
                 android:background="@color/cherryWienerberger"
-                android:textAlignment="center"
+                android:paddingLeft="30dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
