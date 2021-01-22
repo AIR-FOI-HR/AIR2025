@@ -11,6 +11,7 @@ namespace Wienerberger.WebService.Services.Services
     {
         public bool TryConvertFromBase64(string base64String, ref Image convertedImage)
         {
+            base64String = base64String.Replace("data:image/jpeg;base64,", "");
             bool isValid = IsBase64String(base64String);
 
             if(isValid)
@@ -21,7 +22,7 @@ namespace Wienerberger.WebService.Services.Services
 
                 // Convert byte[] to Image
                 ms.Write(imageBytes, 0, imageBytes.Length);
-                Image image = Image.FromStream(ms, true);
+                convertedImage = Image.FromStream(ms, true);
 
                 return true;
             }
