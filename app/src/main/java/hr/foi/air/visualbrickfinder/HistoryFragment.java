@@ -24,8 +24,6 @@ public class HistoryFragment extends Fragment {
 
     @BindView(R.id.pictures_recyclerview)
     RecyclerView recyclerViewPictures;
-    private int pictureId;
-
 
     public HistoryFragment() {
         // Required empty public constructor

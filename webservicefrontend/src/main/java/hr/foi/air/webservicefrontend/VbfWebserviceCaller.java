@@ -80,6 +80,8 @@ public class VbfWebserviceCaller {
                             }
                             break;
                         case (204):
+                            setMockBrickData();
+                            setMockRoofTileData();
                             handleFailure("empty");
                             break;
                     }
@@ -90,8 +92,6 @@ public class VbfWebserviceCaller {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                //setMockBrickData();
-                //setMockRoofTileData();
                 handleFailure("failure");
             }
         });
@@ -131,7 +131,7 @@ public class VbfWebserviceCaller {
         );
 
     }
-/*
+
     private void setMockRoofTileData() {
         List<RoofTile> roofTiles = new ArrayList<>();
         roofTiles.add(new RoofTile(
@@ -159,7 +159,8 @@ public class VbfWebserviceCaller {
         );
 
     }
-*/
+
+
     private void handleResponse(String response) throws IOException {
 
         long tsLong = System.currentTimeMillis();

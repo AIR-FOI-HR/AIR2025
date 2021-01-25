@@ -1,21 +1,16 @@
 package hr.foi.air.visualbrickfinder.picture;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import hr.foi.air.visualbrickfinder.HomepageFragment;
 
 public class CameraPictureProvider implements PictureProvider {
     private Uri imageUri;

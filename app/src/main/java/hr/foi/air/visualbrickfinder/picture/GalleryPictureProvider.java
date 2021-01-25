@@ -1,16 +1,10 @@
 package hr.foi.air.visualbrickfinder.picture;
 
-import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
-import android.net.Uri;
 import android.provider.MediaStore;
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
-import hr.foi.air.visualbrickfinder.MainActivity;
 
 public class GalleryPictureProvider implements PictureProvider {
 

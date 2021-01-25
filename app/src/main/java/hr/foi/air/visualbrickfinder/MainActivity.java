@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_view_btmnav)
     BottomNavigationView btmNav;
     public static Activity activity;
-    private static final int PICK_IMAGE = 100;
     static final String IMAGE_URI = "IMAGE_URI";
 
     public Uri imageUri;
@@ -124,19 +123,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-/*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-            imageUri = data.getData();
-            goToCropPageActivity(imageUri);
-        }
-        else if(resultCode == RESULT_CANCELED){
-            Log.d("AAAAAAAAA", String.valueOf(navHostFragment.getChildFragmentManager().getBackStackEntryCount()));
-        }
-    }
-*/
+
     @Override
     public void onBackPressed() {
         if(btmNav.getVisibility() == View.GONE) btmNav.setVisibility(View.VISIBLE);

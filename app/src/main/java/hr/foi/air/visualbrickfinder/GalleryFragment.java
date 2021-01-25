@@ -25,20 +25,13 @@ import hr.foi.air.visualbrickfinder.picture.PictureRequester;
 
 
 public class GalleryFragment extends Fragment implements PictureRequester {
-
+    private static final int PICK_IMAGE = 100;
     private PictureProvider pictureProvider;
 
     public GalleryFragment() {
         // Required empty public constructor
     }
 
-    private static final int PICK_IMAGE = 100;
-
-    public static Intent getGalleryIntent() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        gallery.setType("image/*");
-        return gallery;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +39,6 @@ public class GalleryFragment extends Fragment implements PictureRequester {
         View v = inflater.inflate(R.layout.fragment_gallery, container, false);
         pictureProvider = new GalleryPictureProvider();
         pictureProvider.getPicture(this, PICK_IMAGE);
-        //startActivityForResult(getGalleryIntent(), PICK_IMAGE);
         return v;
     }
 

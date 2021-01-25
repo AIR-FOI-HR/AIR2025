@@ -36,11 +36,8 @@ public class SimilarProductsStorage {
     private List<RoofTile> roofTiles;
     private SimilarProductsFragment caller;
     private long insertionTimestamp;
-    private Context context;
 
-    public SimilarProductsStorage(Context context) {
-        this.context=context;
-    }
+    public SimilarProductsStorage() { }
 
 
     public void getProducts(SimilarProductsFragment caller, Uri pictureUri) {
@@ -69,8 +66,6 @@ public class SimilarProductsStorage {
         caller.receiveRoofTiles(roofTiles);
         saveProductImagesRoofTiles(roofTiles,caller.imageUriReference);
     }
-
-
 
     private void returnSimilarBricks() {
         caller.receiveBricks(bricks);
@@ -167,27 +162,19 @@ public class SimilarProductsStorage {
     private void saveEachProductPhoto() {
         if(bricks==null)
             for (RoofTile roofTile: roofTiles) {
-                imageDownload(roofTile.getWebsiteImageUrl());
+                saveImageToStorage(roofTile.getWebsiteImageUrl());
                 roofTile.setLocalImageUrl(getProductDirectory(roofTile.getWebsiteImageUrl()));
             }
         else
             for (Brick brick: bricks) {
-                imageDownload(brick.getWebsiteImageUrl());
+                saveImageToStorage(brick.getWebsiteImageUrl());
                 brick.setLocalImageUrl(getProductDirectory(brick.getWebsiteImageUrl()));
             }
-    }
-
-
-    private void imageDownload(String image) {
-        saveImageToStorage(image);
     }
 
     private void saveImageToStorage(String image) {
         Picasso.get().load(image).into(getTarget(image));
     }
-
-
-
 
     private Target getTarget(String image) {
         return new Target(){
